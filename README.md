@@ -1,24 +1,26 @@
 # Mana reservation calculator for Path of Exile
 
-<div style="text-align: center;">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraregen.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auramana.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracrit.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafire.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracold.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightning.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auradamage.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/DeliriumAura.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/SpellDamageAura.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraarmour.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraenergy.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraevasion.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraspeed.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraresist.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafireresist.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracoldresist.png?" style="width:5%">
-  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightningresist.png?" style="width:5%">
-</div>
+Supported auras:
+
+<div align="center">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraregen.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auramana.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracrit.png"><br>
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafire.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracold.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightning.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/DeliriumAura.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auradamage.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/SpellDamageAura.png"><br>
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraresist.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafireresist.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracoldresist.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightningresist.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraarmour.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraenergy.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraevasion.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraspeed.png">
+</div align="center">
 
 ## Why yet another calc? Why not use Path of Building?
 
