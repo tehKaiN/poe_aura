@@ -1,0 +1,175 @@
+@font-face {
+	font-family: 'FontinSmallCaps';
+	src: url('https://web.poecdn.com/font/fontin-smallcaps-webfont.eot');
+	src: local("?"),
+		url('https://web.poecdn.com/font/fontin-smallcaps-webfont.woff') format("woff"),
+		url('https://web.poecdn.com/font/fontin-smallcaps-webfont.ttf') format("truetype"),
+		url('https://web.poecdn.com/font/fontin-smallcaps-webfont.svg#webfontSCusr8QL') format("svg");
+	font-weight: normal;
+	font-style: normal
+}
+
+body {
+	background: black;
+	color: rgb(163, 141, 109);
+	font-family: "FontinSmallCaps", Helvetica, Arial, sans-serif;
+	columns: 2;
+}
+
+body > div {
+	break-inside: avoid;
+	padding: 3px;
+	margin: 0 5px 20px 5px;
+	background: rgb(24, 22, 22);
+	border: solid 0.75px rgb(40, 40, 40);
+}
+
+h2 {
+	padding: 0;
+	margin: 10px 5px;
+}
+
+input {
+	background: black;
+	border: solid 0.75px rgb(40, 40, 40);
+	color: #00cccc;
+	margin-left: 5px;
+	font-family: "FontinSmallCaps", Helvetica, Arial, sans-serif;
+	font-size: larger;
+}
+
+.char_stats {
+	width: 50px;
+	text-align: center;
+}
+
+form .option {
+	display: inline-block;
+	background: rgb(48, 44, 44);
+	margin: 5px;
+	padding: 5px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th {
+	padding: 5px 10px;
+}
+
+td {
+	padding: 5px;
+	text-align: center;
+	border-top: solid 1px black;
+}
+
+td:first-child {
+	text-align: left;
+}
+
+.life {
+	color: #d20000;
+}
+
+.mana {
+	color:#0000d2;
+}
+
+.info {
+	font-size: larger
+}
+
+.aura_table * {
+	transition: all 0.2s linear;
+}
+
+.aura_table TABLE {
+	width: 100%;
+}
+
+.aura_table .disabled {
+	color: #555;
+}
+.aura_table .disabled img {
+	filter: grayscale(100%)
+}
+
+.gem_lvl, .cluster {
+	max-width: 30px;
+	text-align: center;
+}
+
+table .sep {
+	position: relative;
+	text-align: center;
+	font-weight: bold;
+	background: url('https://web.poecdn.com/image/Art/2DArt/UIImages/InGame/ItemsHeaderGemMiddle.png?scale=1');
+	background-size:contain;
+}
+
+table .sep:before {
+	position: absolute;
+	top: 0; bottom: 0; left: 0;
+	width: 100px; /* bigger than needed */
+	content: '';
+	display: block;
+	background: url('https://web.poecdn.com/image/Art/2DArt/UIImages/InGame/ItemsHeaderGemLeft.png?scale=1');
+	background-size:contain;
+	background-repeat: no-repeat;
+}
+
+table .sep:after {
+	position: absolute;
+	top: 0; bottom: 0; right: 0;
+	width: 100px; /* bigger than needed */
+	content: '';
+	display: block;
+	background: url('https://web.poecdn.com/image/Art/2DArt/UIImages/InGame/ItemsHeaderGemRight.png?scale=1');
+	background-size:contain;
+	background-repeat: no-repeat;
+	background-position-x: right;
+}
+
+.icon {
+	height: 1.25em;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.round {
+	border-radius: 15px;
+}
+
+input[type=checkbox] {
+	appearance: none;
+	background-color: #666;
+	padding: 0.4em;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+
+input[type=checkbox]:checked {
+	background-color: #00cccc;
+}
+
+input[type=radio] {
+	appearance: none;
+	background-color: #666;
+	padding: 0.4em;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+
+input[type=radio]:checked {
+	background-color: #00cccc;
+}
+
+table label {
+	display: block;
+	width: 100%;
+	height: 100%;
+}

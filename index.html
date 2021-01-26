@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>No bullshit mana reservation calc</title>
+	<script type="text/javascript" src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div id="char">
+		<h2>Character</h2>
+		<form name="char">
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusstrength.png?scale=1" class="icon round">Strength <input name="str" value="100" class="char_stats"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusdexterity.png?scale=1" class="icon round">Dexterity <input name="ag" value="100" class="char_stats"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusintelligence.png?scale=1" class="icon round">Intelligence <input name="int" value="100" class="char_stats"></label></div>
+			<div class="option"><label>Life <input name="life" value="1000" class="char_stats"></label></div>
+			<div class="option"><label>Mana <input name="mana" value="1000" class="char_stats"></label></div>
+		</form>
+
+		<h2>RMR Inventory</h2>
+		<form name="inventory">
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/Wolfhead.png?scale=1" class="icon">Alpha's Howl (8)<input type="checkbox" value="8"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/item/popup/elder-symbol.png?scale=1" class="icon">Amulet (7)<input type="checkbox" value="7"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/Skyforth.png?scale=1" class="icon">Skyforth (6)<input type="checkbox" value="6"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/HelmetOfDominance2.png?synthesised=1&scale=1" class="icon">Mask of the tribunal <span id="mask_res"></span><input type="checkbox" name="mask"></label></div>
+			<div class="option">
+				<label><img src="https://web.poecdn.com/image/Art/2DItems/Jewels/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" value="2" checked="checked"></label>
+				<label>RMR (1)<input type="checkbox" value="1"></label>
+			</div>
+			<div class="option">
+				<label><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1" class="icon">Blood magic lvl <input name="bm_lvl" value="20" class="gem_lvl"></label>
+				<label>Anomalous (2) <input type="checkbox" name="bm_qty" value="2"></label>
+				<span id="bm_mana_mult"></span>
+			</div>
+			<div class="option"><label>Jewel RMR (1)<input type="checkbox" value="1"></label></div>
+			<div class="option"><label>Jewel RMR (1)<input type="checkbox" value="1"></label></div>
+			<div class="option"><label>Jewel RMR (1)<input type="checkbox" value="1"></label></div>
+		</form>
+	</div>
+	<div id="passives">
+		<h2>RMR Passives</h2>
+		<form name="passives">
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/sovereignty.png?scale=1" class="icon">Sovereignty (4 + 4 + 6)<input type="checkbox" value="14" checked="checked"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/leadership.png?scale=1" class="icon">Leadership (4)<input type="checkbox" value="4" checked="checked"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/influence.png?scale=1" class="icon">Influence (4)<input type="checkbox" value="4" checked="checked"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/authority.png?scale=1" class="icon">Charisma (4 + 8)<input type="checkbox" value="12" checked="checked"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/Champion.png?scale=1" class="icon">Champion of the cause (4)<input type="checkbox" value="4"></label></div>
+		</form>
+		<h2>Clusters</h2>
+		<form name="clusters">
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/LightningResistNotable.png?scale=1" class="icon">Pure Aptitude (PoL 30%)<input class="cluster" name="pure_aptitude" value="0"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/ColdResistNotable.png?scale=1" class="icon">Pure Guile (PoI 30%)<input class="cluster" name="pure_guile" value="0"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/FireResistNotable.png?scale=1" class="icon">Pure Might (PoF 30%)<input class="cluster" name="pure_might" value="0"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/EnergyShieldNotable.png?scale=1" class="icon">Self-Control (Discipline 30%)<input class="cluster" name="self_control" value="0"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/EvasionNotable.png?scale=1" class="icon">Sublime form (Grace 30%)<input class="cluster" name="sublime_form" value="0"></label></div>
+			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/ArmourNotable.png?scale=1" class="icon">Uncompromising (Determination 30%)<input class="cluster" name="uncompromising" value="0"></label></div>
+		</form>
+	</div>
+
+	<div class="info">
+		<h2>Summary</h2>
+		<div id="rmr_total"></div>
+		<div id="reserve_life" class="life"></div>
+		<div id="reserve_life_point" class="life"></div>
+		<div id="reserve_mana" class="mana"></div>
+		<div id="reserve_mana_point" class="mana"></div>
+		<div id="auras_enabled"></div>
+	</div>
+
+	<div class="aura_table point_based">
+		<h2>Point-based auras</h2>
+		<form name="auras_points">
+			<table id="table_aura_points">
+				<tr>
+					<th>Aura</th><th>Effect</th>
+					<th>Level</th>
+					<th>Base val</th>
+					<th>Off</th>
+					<th>Mana</th>
+					<th>Blood<br>magic</th>
+					<th>Prism<br>guardian</th>
+					<th>Reserved</th>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraregen.png?" class="icon">Vitality</td><td>Life regen</td>
+					<td><input name="level_vit" value="20" class="gem_lvl"></td>
+					<td id="rsvd_vit"></td>
+					<td><label><input type="radio" name="group_point_vit" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_point_vit" value="mana"></label></td>
+					<td><label><input type="radio" name="group_point_vit" value="bm"></label></td>
+					<td><label><input type="radio" name="group_point_vit" value="pg"></label></td>
+					<td id="reserved_point_vit"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auramana.png?" class="icon">Clarity</td><td>Mana regen</td>
+					<td><input name="level_clar" value="20" class="gem_lvl"></td>
+					<td id="rsvd_clar"></td>
+					<td><label><input type="radio" name="group_point_clar" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_point_clar" value="mana"></label></td>
+					<td><label><input type="radio" name="group_point_clar" value="bm"></label></td>
+					<td><label><input type="radio" name="group_point_clar" value="pg"></label></td>
+					<td id="reserved_point_clar"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracrit.png?" class="icon">Precision</td><td>Accuracy</td>
+					<td><input name="level_prec" value="20" class="gem_lvl"></td>
+					<td id="rsvd_prec"></td>
+					<td><label><input type="radio" name="group_point_prec" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_point_prec" value="mana"></label></td>
+					<td><label><input type="radio" name="group_point_prec" value="bm"></label></td>
+					<td><label><input type="radio" name="group_point_prec" value="pg"></label></td>
+					<td id="reserved_point_prec"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div class="aura_table">
+		<h2>Percentage-based Auras</h2>
+		<form name="auras">
+			<table id="table_aura_percent">
+				<tr>
+					<th>Aura</th><th>Effect</th>
+					<th>Base %</th>
+					<th>Off</th>
+					<th>Mana</th>
+					<th>Blood<br>magic</th>
+					<th>Prism<br>guardian</th>
+					<th>Reserved</th>
+				</tr>
+				<tr><td colspan="8" class="sep">Offence</td></tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafire.png?" class="icon">Anger</td><td>Fire dmg</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_anger" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_anger" value="mana"></label></td>
+					<td><label><input type="radio" name="group_anger" value="bm"></label></td>
+					<td><label><input type="radio" name="group_anger" value="pg"></label></td>
+					<td id="reserved_anger"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracold.png?" class="icon">Hatred</td><td>Cold dmg</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_hatred" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_hatred" value="mana"></label></td>
+					<td><label><input type="radio" name="group_hatred" value="bm"></label></td>
+					<td><label><input type="radio" name="group_hatred" value="pg"></label></td>
+					<td id="reserved_hatred"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightning.png?" class="icon">Wrath</td><td>Lightning dmg</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_wrath" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_wrath" value="mana"></label></td>
+					<td><label><input type="radio" name="group_wrath" value="bm"></label></td>
+					<td><label><input type="radio" name="group_wrath" value="pg"></label></td>
+					<td id="reserved_wrath"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auradamage.png?" class="icon">Pride</td><td>Phys dmg</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_pride" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_pride" value="mana"></label></td>
+					<td><label><input type="radio" name="group_pride" value="bm"></label></td>
+					<td><label><input type="radio" name="group_pride" value="pg"></label></td>
+					<td id="reserved_pride"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/DeliriumAura.png?" class="icon">Malevolence</td><td>DoT, skill dur</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_malev" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_malev" value="mana"></label></td>
+					<td><label><input type="radio" name="group_malev" value="bm"></label></td>
+					<td><label><input type="radio" name="group_malev" value="pg"></label></td>
+					<td id="reserved_malev"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/SpellDamageAura.png?" class="icon">Zealotry</td><td>Consecr gnd</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_zeal" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_zeal" value="mana"></label></td>
+					<td><label><input type="radio" name="group_zeal" value="bm"></label></td>
+					<td><label><input type="radio" name="group_zeal" value="pg"></label></td>
+					<td id="reserved_zeal"></td>
+				</tr>
+				<tr><td colspan="8" class="sep">Defence</td></tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraarmour.png?" class="icon">Determination</td><td>Armour</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_determ" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_determ" value="mana"></label></td>
+					<td><label><input type="radio" name="group_determ" value="bm"></label></td>
+					<td><label><input type="radio" name="group_determ" value="pg"></label></td>
+					<td id="reserved_determ"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraenergy.png?" class="icon">Discipline</td><td>Ene shield</td>
+					<td>35</td>
+					<td><label><input type="radio" name="group_discipline" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_discipline" value="mana"></label></td>
+					<td><label><input type="radio" name="group_discipline" value="bm"></label></td>
+					<td><label><input type="radio" name="group_discipline" value="pg"></label></td>
+					<td id="reserved_discipline"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraevasion.png?" class="icon">Grace</td><td>Evasion</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_grace" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_grace" value="mana"></label></td>
+					<td><label><input type="radio" name="group_grace" value="bm"></label></td>
+					<td><label><input type="radio" name="group_grace" value="pg"></label></td>
+					<td id="reserved_grace"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraspeed.png?" class="icon">Haste</td><td>Speed</td>
+					<td>50</td>
+					<td><label><input type="radio" name="group_haste" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_haste" value="mana"></label></td>
+					<td><label><input type="radio" name="group_haste" value="bm"></label></td>
+					<td><label><input type="radio" name="group_haste" value="pg"></label></td>
+					<td id="reserved_haste"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraresist.png?" class="icon">Purity of Elements</td><td>Res</td>
+					<td>35</td>
+					<td><label><input type="radio" name="group_purele" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_purele" value="mana"></label></td>
+					<td><label><input type="radio" name="group_purele" value="bm"></label></td>
+					<td><label><input type="radio" name="group_purele" value="pg"></label></td>
+					<td id="reserved_purele"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafireresist.png?" class="icon">Purity of Fire</td><td>Res</td>
+					<td>35</td>
+					<td><label><input type="radio" name="group_purfire" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_purfire" value="mana"></label></td>
+					<td><label><input type="radio" name="group_purfire" value="bm"></label></td>
+					<td><label><input type="radio" name="group_purfire" value="pg"></label></td>
+					<td id="reserved_purfire"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracoldresist.png?" class="icon">Purity of Ice</td><td>Res</td>
+					<td>35</td>
+					<td><label><input type="radio" name="group_purice" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_purice" value="mana"></label></td>
+					<td><label><input type="radio" name="group_purice" value="bm"></label></td>
+					<td><label><input type="radio" name="group_purice" value="pg"></label></td>
+					<td id="reserved_purice"></td>
+				</tr>
+				<tr>
+					<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightningresist.png?" class="icon">Purity of Lightning</td><td>Res</td>
+					<td>35</td>
+					<td><label><input type="radio" name="group_purlight" value="off" checked="checked"></label></td>
+					<td><label><input type="radio" name="group_purlight" value="mana"></label></td>
+					<td><label><input type="radio" name="group_purlight" value="bm"></label></td>
+					<td><label><input type="radio" name="group_purlight" value="pg"></label></td>
+					<td id="reserved_purlight"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+
+</html>
