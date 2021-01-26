@@ -184,6 +184,7 @@ function recalcReserved() {
 				ElementReserved.parentElement.lastElementChild.className = 'mana';
 			}
 			ElementReserved.innerHTML = `${ReservedPointsForThisAura} (${ReservedPercentForThisAura}%)`;
+			ElementReserved.parentElement.className = '';
 		}
 		else {
 			ElementReserved.innerHTML = '';
