@@ -10,9 +10,9 @@ g_AurasPercent = {
 	'malev': {name: "Malevolence", resvd: 50},
 	'pride': {name: "Pride", resvd: 50},
 	'purele': {name: "Purity of Elements", resvd: 35},
-	'purfire': {name: "Purity of Fire", resvd: 35},
-	'purice': {name: "Purity of Ice", resvd: 35},
-	'purlight': {name: "Purity of Lightning", resvd: 35},
+	'purfire': {name: "Purity of Fire", abbr: 'PoF', resvd: 35},
+	'purice': {name: "Purity of Ice", abbr: 'PoI', resvd: 35},
+	'purlight': {name: "Purity of Lightning", abbr: 'PoL', resvd: 35},
 	'wrath': {name: "Wrath", resvd: 50},
 	'zeal': {name: "Zealotry", resvd: 50},
 };
@@ -45,20 +45,28 @@ g_BloodMagic = [ 0,
 	164, 163, 162, 160, 158, 157, 156, 154, 152, 151
 ];
 
+g_Passives = [
+	{name: 'Sovereignty', rmr: [4, 4, 6], icon: 'sovereignty'},
+	{name: 'Leadership', rmr: [4], icon: 'leadership'},
+	{name: 'Influence', rmr: [4], icon: 'influence'},
+	{name: 'Charisma', rmr: [4, 8], icon: 'authority'},
+	{name: 'Champion of the cause', rmr: [4], icon: 'Champion'}
+];
+
 g_Clusters = {
-	pure_aptitude: {aura: 'purlight', rmr: 30},
-	pure_guile: {aura: 'purice', rmr: 30},
-	pure_might: {aura: 'purfire', rmr: 30},
-	self_control: {aura: 'discipline', rmr: 30},
-	sublime_form: {aura: 'grace', rmr: 30},
-	uncompromising: {aura: 'determ', rmr: 30},
+	pure_aptitude: {name: 'Pure Aptitude', affects: 'purlight', rmr: 30, icon: 'LightningResistNotable'},
+	pure_guile: {name: 'Pure Guile', affects: 'purice', rmr: 30, icon: 'ColdResistNotable'},
+	pure_might: {name: 'Pure Might', affects: 'purfire', rmr: 30, icon: 'FireResistNotable'},
+	self_control: {name: 'Self-Control', affects: 'discipline', rmr: 30, icon: 'EnergyShieldNotable'},
+	sublime_form: {name: 'Sublime Form', affects: 'grace', rmr: 30, icon: 'EvasionNotable'},
+	uncompromising: {name: 'Uncompromising', affects: 'determ', rmr: 30, icon: 'ArmourNotable'},
 };
 
 function getRmrFromClustersForAura(AuraCodeName) {
 	var Rmr = 0;
 	for(ClusterName in g_Clusters) {
 		var Cluster = g_Clusters[ClusterName];
-		if(Cluster.aura == AuraCodeName) {
+		if(Cluster.affects == AuraCodeName) {
 			// Check how many clusters are enabled
 			Rmr += Cluster.rmr * parseInt(document.clusters[ClusterName].value);
 		}
@@ -209,7 +217,57 @@ function makeSensitiveToChange(Collection) {
 	}
 }
 
+function initUiPassives() {
+	// Create passives checkboxes
+	for(var Passive of g_Passives) {
+		var RmrString = '';
+		var RmrTotal = 0;
+		if (typeof(Passive.rmr) == 'number') {
+			Passive.rmr = [Passive.rmr];
+		}
+		for(var RmrNode of Passive.rmr) {
+			RmrTotal += RmrNode;
+			if(RmrString.length) {
+				RmrString += ' + ';
+			}
+			RmrString += RmrNode;
+		}
+		document.passives.innerHTML += (
+			`<div class="option"><label>` +
+			`<img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/${Passive.icon}.png?scale=1" class="icon">` +
+			`${Passive.name} (${RmrString})<input type="checkbox" value="${RmrTotal}">` +
+			`</label></div>`
+		);
+	}
+}
+
+function initUiClusters() {
+	// Create cluster checkboxes
+	for(var ClusterCode in g_Clusters) {
+		var Cluster = g_Clusters[ClusterCode];
+		var AffectsAura = g_AurasPercent[Cluster.affects];
+		if(!AffectsAura) {
+			AffectsAura = g_AurasPoints[Cluster.affects];
+		}
+		var AffectsName = AffectsAura.name;
+		if(AffectsAura.abbr) {
+			AffectsName = `<abbr title="${AffectsName}">${AffectsAura.abbr}</abbr>`;
+		}
+		document.clusters.innerHTML += (
+			`<div class="option"><label>` +
+			`<img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/${Cluster.icon}.png?scale=1" class="icon">` +
+			`${Cluster.name} (${AffectsName} ${Cluster.rmr}%)` +
+			`<input class="cluster" name="${ClusterCode}" value="0">` +
+			`</label></div>`
+		);
+	}
+}
+
 function calcMain() {
+	initUiPassives();
+	initUiClusters();
+
+	// Get all RMR inventory/passive inputs
 	var Inputs = document.passives.getElementsByTagName('input');
 	for(var i = 0; i < Inputs.length; ++i) {
 		g_RmrInputs.push(Inputs[i]);
@@ -222,6 +280,7 @@ function calcMain() {
 	makeSensitiveToChange(g_RmrInputs);
 	makeSensitiveToChange(document.auras.getElementsByTagName('input'));
 	makeSensitiveToChange(document.auras_points.getElementsByTagName('input'));
+	makeSensitiveToChange(document.clusters.getElementsByTagName('input'));
 	makeSensitiveToChange(document.char.getElementsByTagName('input'));
 
 	recalcReserved();

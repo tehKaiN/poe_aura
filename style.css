@@ -69,11 +69,11 @@ td:first-child {
 }
 
 .life {
-	color: #d20000;
+	color: rgb(239, 78, 78);
 }
 
 .mana {
-	color:#0000d2;
+	color: rgb(36, 135, 235);
 }
 
 .info {
@@ -166,10 +166,16 @@ input[type=radio] {
 
 input[type=radio]:checked {
 	background-color: #00cccc;
+	transform: rotate(45deg);
 }
 
 table label {
 	display: block;
 	width: 100%;
 	height: 100%;
+}
+
+abbr {
+	text-decoration: none;
+	cursor: help;
 }
