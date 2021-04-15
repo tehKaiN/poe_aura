@@ -16,7 +16,7 @@ body {
 	columns: 2;
 }
 
-body > div {
+body > div, body > form > div {
 	break-inside: avoid;
 	padding: 3px;
 	margin: 0 5px 20px 5px;
@@ -76,7 +76,7 @@ td:first-child {
 	color: rgb(36, 135, 235);
 }
 
-.info {
+.info > DIV {
 	font-size: larger
 }
 
@@ -95,7 +95,7 @@ td:first-child {
 	filter: grayscale(100%)
 }
 
-.gem_lvl, .cluster {
+.input_small, .cluster {
 	max-width: 30px;
 	text-align: center;
 }
@@ -178,4 +178,8 @@ table label {
 abbr {
 	text-decoration: none;
 	cursor: help;
+}
+
+.row_hidden {
+	display: none;
 }

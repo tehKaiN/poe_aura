@@ -8,41 +8,6 @@
 </head>
 
 <body>
-	<div id="char">
-		<h2>Character</h2>
-		<form name="char">
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusstrength.png?scale=1" class="icon round">Strength <input name="str" value="100" class="char_stats"></label></div>
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusdexterity.png?scale=1" class="icon round">Dexterity <input name="ag" value="100" class="char_stats"></label></div>
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusintelligence.png?scale=1" class="icon round">Intelligence <input name="int" value="100" class="char_stats"></label></div>
-			<div class="option"><label>Life <input name="life" value="1000" class="char_stats"></label></div>
-			<div class="option"><label>Mana <input name="mana" value="1000" class="char_stats"></label></div>
-		</form>
-
-		<h2>RMR Inventory</h2>
-		<form name="inventory">
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/Wolfhead.png?scale=1" class="icon">Alpha's Howl (8)<input type="checkbox" name="item_alpha" value="8"></label></div>
-			<div class="option"><label><img src="https://web.poecdn.com/image/item/popup/redeemer-symbol.png?scale=1" class="icon">Amulet (7)<input type="checkbox" name="item_amulet" value="7"></label></div>
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/Skyforth.png?scale=1" class="icon">Skyforth (6)<input type="checkbox" name="item_skyforth" value="6"></label></div>
-			<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/HelmetOfDominance2.png?synthesised=1&scale=1" class="icon">Mask of the tribunal <span id="item_mask_res"></span><input type="checkbox" name="item_mask"></label></div>
-			<div class="option">
-				<label><img src="https://web.poecdn.com/image/Art/2DItems/Jewels/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
-				<label><img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
-			</div>
-			<div class="option">
-				<label><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1" class="icon">Blood magic lvl <input name="bm_lvl" value="20" min="1" max="40" class="gem_lvl"></label>
-				<label>Anomalous (2) <input type="checkbox" name="bm_qty" value="2"></label>
-				<span id="bm_mana_mult"></span>
-			</div>
-			<div class="option"><label>Jewel <img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input name="item_jew1_impljew" type="checkbox" value="1"></label></div>
-			<div class="option"><label>Jewel <img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input name="item_jew2_impljew" type="checkbox" value="1"></label></div>
-			<div class="option"><label>Jewel <img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input name="item_jew3_impljew" type="checkbox" value="1"></label></div>
-		</form>
-	</div>
-	<div id="passives">
-		<h2>RMR Passives</h2><form name="passives"></form>
-		<h2>Clusters</h2><form name="clusters"></form>
-	</div>
-
 	<div class="info">
 		<h2>Summary</h2>
 		<div id="rmr_total"></div>
@@ -51,42 +16,78 @@
 		<div id="reserve_mana" class="mana"></div>
 		<div id="reserve_mana_point" class="mana"></div>
 		<div id="auras_enabled"></div>
-	</div>
-
-	<div class="aura_table point_based">
-		<h2>Point-based auras</h2>
-		<form name="auras_points">
-			<table id="table_aura_points">
-				<tr>
-					<th>Aura</th><th>Effect</th>
-					<th>Level</th>
-					<th>Base val</th>
-					<th>Off</th>
-					<th>Mana</th>
-					<th>Blood<br>magic</th>
-					<th>Prism<br>guardian</th>
-					<th>Reserved</th>
-				</tr>
-			</table>
+		<form name="settings">
+			<label>
+				Hide disabled <input type="checkbox" name="hide_disabled">
+			</label>
+			<input type="button" value="Update link" name="save">
 		</form>
 	</div>
+	<form name="calc">
+		<div id="char">
+			<h2>Character</h2>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusstrength.png?scale=1" class="icon round">Strength <input name="char_str" value="100" class="char_stats"></label></div>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusdexterity.png?scale=1" class="icon round">Dexterity <input name="char_dex" value="100" class="char_stats"></label></div>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusintelligence.png?scale=1" class="icon round">Intelligence <input name="char_int" value="100" class="char_stats"></label></div>
+				<div class="option"><label>Life <input name="char_life" value="1000" class="char_stats"></label></div>
+				<div class="option"><label>Mana <input name="char_mana" value="1000" class="char_stats"></label></div>
 
-	<div class="aura_table">
-		<h2>Percentage-based Auras</h2>
-		<form name="auras">
-			<table id="table_aura_percent">
-				<tr>
-					<th>Aura</th><th>Effect</th>
-					<th>Base %</th>
-					<th>Off</th>
-					<th>Mana</th>
-					<th>Blood<br>magic</th>
-					<th>Prism<br>guardian</th>
-					<th>Reserved</th>
-				</tr>
-			</table>
-		</form>
-	</div>
+			<h2>RMR Inventory</h2>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/Wolfhead.png?scale=1" class="icon">Alpha's Howl (8)<input type="checkbox" name="item_alpha" value="8"></label></div>
+				<div class="option">
+					<label><img src="https://web.poecdn.com/image/item/popup/redeemer-symbol.png?scale=1" class="icon">Amulet <input name="item_amulet_redeemer" value="0" min="0" max="5" class="input_small"></label>
+					<label><img src="https://web.poecdn.com/image/Art/2DItems/Currency/Catalysts/FertileCatalyst.png" title="Fertile catalyst" class="icon"> (1)<input type="checkbox" name="item_amulet_fertile" value="1"></label>
+					<label><img src="https://web.poecdn.com/image/Art/2DItems/Amulets/HeistAmulet2.png" title="Simplex implicit: 25% increased Explicit Modifier magnitudes" class="icon"> (1)<input type="checkbox" name="item_amulet_simplex" value="1"></label>
+				</div>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/Skyforth.png?scale=1" class="icon">Skyforth (6)<input type="checkbox" name="item_skyforth" value="6"></label></div>
+				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/HelmetOfDominance2.png?synthesised=1&scale=1" class="icon">Mask of the tribunal <span id="item_mask_res"></span><input type="checkbox" name="item_mask"></label></div>
+				<div class="option">
+					<label><img src="https://web.poecdn.com/image/Art/2DItems/Jewels/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
+					<label><img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
+				</div>
+				<div class="option">
+					<label><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/Arrogance.png?scale=1" class="icon">Arrogance lvl <input name="bm_lvl" value="20" min="1" max="40" class="input_small"></label>
+					<label>Anomalous (1) <input type="checkbox" name="bm_qty"></label>
+					<span id="bm_mana_mult"></span>
+				</div>
+				<div class="option"><label>Jewel <img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> <input name="item_jew_implrmr" value="0" min="0" max="20" class="input_small" value="1"></label></div>
+		</div>
+		<div id="passives">
+			<h2>RMR Passives</h2><div id="passive_ctl"></div>
+			<h2>Clusters</h2><div id="cluster_ctl"></div>
+		</div>
+
+		<div class="aura_table point_based">
+			<h2>Point-based auras</h2>
+				<table id="table_aura_points">
+					<tr>
+						<th>Aura</th><th>Effect</th>
+						<th>Level</th>
+						<th>Base val</th>
+						<th>Off</th>
+						<th>Mana</th>
+						<th>Arrogance</th>
+						<th>Prism<br>guardian</th>
+						<th>Reserved</th>
+					</tr>
+				</table>
+		</div>
+
+		<div class="aura_table">
+			<h2>Percentage-based Auras</h2>
+				<table id="table_aura_percent">
+					<tr>
+						<th>Aura</th><th>Effect</th>
+						<th>Base %</th>
+						<th>Off</th>
+						<th>Mana</th>
+						<th>Arrogance</th>
+						<th>Prism<br>guardian</th>
+						<th>Reserved</th>
+					</tr>
+				</table>
+		</div>
+	</form>
 
 </body>
 

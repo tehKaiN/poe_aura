@@ -6,6 +6,11 @@ Supported auras:
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraregen.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auramana.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracrit.png"><br>
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofAsh.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofIce.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofThunder.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldOfLight.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldOfAgony.png"><br>
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/aurafire.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracold.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auralightning.png">
@@ -20,6 +25,7 @@ Supported auras:
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraenergy.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraevasion.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraspeed.png">
+
 </div align="center">
 
 ## Why yet another calc? Why not use Path of Building?
