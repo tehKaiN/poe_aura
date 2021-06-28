@@ -79,6 +79,10 @@ g_AurasPercent = {
 	'heraldash': {name: "Herald of Ash", icon: 'HeraldofAsh', effect: 'Fire dmg', resvd: 25},
 	'heraldpurity': {name: "Herald of Purity", icon: 'HeraldOfLight', effect: 'Sentinels', resvd: 25},
 	'heraldagony': {name: "Herald of Agony", icon: 'HeraldOfAgony', effect: 'Crawler', resvd: 25},
+	'aspectavian': {name: "Aspect of the Avian", icon: 'AvianAspect', effect: 'Dmg/speed', resvd: 25},
+	'aspectcat': {name: "Aspect of the Cat", icon: 'CatAspect', effect: 'Crit/stealth/speed', resvd: 25},
+	'aspectcrab': {name: "Aspect of the Crab", icon: 'CrabAspect', effect: 'Dmg reduction', resvd: 25},
+	'aspectspider': {name: "Aspect of the Spider", icon: 'SpiderAspect', effect: 'Hinder', resvd: 25},
 };
 
 g_AurasPoints = {
@@ -197,8 +201,12 @@ function recalcReserved() {
 					Rmr += 1;
 				}
 			}
+			else if(InputGroup.value == 'ml') {
+				// March of the Legion
+				ManaMultiplier = 0;
+			}
 			Rmr += getRmrFromClustersForAura(AuraName);
-			var ReservedPercentForThisAura = Math.ceil(Math.floor(AuraDef.resvd * (ManaMultiplier / 100)) * (100 - (Rmr)) / 10) / 10;
+			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) * (100 - (Rmr))) / 100;
 			if(isLife) {
 				ReservedPointsForThisAura = Math.ceil(TotalLife * ReservedPercentForThisAura / 100);
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -252,10 +260,15 @@ function recalcReserved() {
 				ManaMultiplier *= BloodMagicMult / 100;
 				isLife = true;
 			}
+			else if(InputGroup.value == 'ml') {
+				// March of the Legion
+				ManaMultiplier = 0;
+			}
+
 			var ElementLevel = document.calc[`level_${AuraName}`];
 			var BaseReserved = AuraDef.resvd[ElementLevel.value];
 			$(`#rsvd_${AuraName}`).innerHTML = BaseReserved;
-			var ReservedPointsForThisAura = Math.ceil(Math.floor(BaseReserved * (ManaMultiplier / 100)) * (100 - (Rmr)) / 100);
+			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) * (100 - (Rmr)) / 100);
 			var ReservedPercentForThisAura;
 			if(isLife) {
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -375,6 +388,7 @@ function initUiAuraPoints() {
 			<td><label><input type="radio" name="group_point_${AuraCode}" value="mana"></label></td>
 			<td><label><input type="radio" name="group_point_${AuraCode}" value="bm"></label></td>
 			<td><label><input type="radio" name="group_point_${AuraCode}" value="pg"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="ml"></label></td>
 			<td id="reserved_point_${AuraCode}"></td>
 		`;
 		$('#table_aura_points').appendChild(Row);
@@ -384,7 +398,7 @@ function initUiAuraPoints() {
 function initUiAuraPercent(Label, AuraCodes) {
 	// Header
 	var Row = document.createElement('tr');
-	Row.innerHTML = `<td colspan="8" class="sep">${Label}</td>`;
+	Row.innerHTML = `<td colspan="9" class="sep">${Label}</td>`;
 	$('#table_aura_percent').appendChild(Row);
 
 	// Auras
@@ -398,6 +412,7 @@ function initUiAuraPercent(Label, AuraCodes) {
 			<td><label><input type="radio" name="group_${AuraCode}" value="mana"></label></td>
 			<td><label><input type="radio" name="group_${AuraCode}" value="bm"></label></td>
 			<td><label><input type="radio" name="group_${AuraCode}" value="pg"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="ml"></label></td>
 			<td id="reserved_${AuraCode}"></td>
 		`;
 		$('#table_aura_percent').appendChild(Row);
@@ -471,10 +486,17 @@ g_ExportFields = [
 	{input_name: 'group_heraldthunder', type: 'radio'},
 	{input_name: 'group_heraldpurity', type: 'radio'},
 	{input_name: 'group_heraldagony', type: 'radio'},
+	{input_name: 'group_aspectavian', type: 'radio'},
+	{input_name: 'group_aspectcat', type: 'radio'},
+	{input_name: 'group_aspectcrab', type: 'radio'},
+	{input_name: 'group_aspectspider', type: 'radio'},
+	{input_name: 'item_saqawal', type: 'int'},
+	// {input_name: 'item_marchoflegion', type: 'checkbox'},
+	// {input_name: 'item_shield', type: 'int'},
 	{input_name: 'save', type: 'ignore'},
 ];
 
-g_RadioOptions = ['off', 'mana', 'bm', 'pg'];
+g_RadioOptions = ['off', 'mana', 'bm', 'pg', 'ml'];
 
 function saveToUrl() {
 	// Check if all inputs are handled in some way
@@ -633,6 +655,7 @@ function calcMain() {
 	initUiAuraPercent('Offence', ['anger', 'hatred', 'wrath', 'pride', 'malev', 'zeal']);
 	initUiAuraPercent('Defence', ['determ', 'discipline', 'grace', 'haste', 'purele', 'purfire', 'purice', 'purlight']);
 	initUiAuraPercent('Heralds', ['heraldash', 'heraldice', 'heraldthunder', 'heraldpurity', 'heraldagony']);
+	initUiAuraPercent('Aspects', ['aspectavian', 'aspectcat', 'aspectcrab', 'aspectspider']);
 
 	// Get all RMR inventory/passive inputs
 	var Inputs = $$('input[name^="passive_"]');

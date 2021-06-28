@@ -6,6 +6,10 @@ Supported auras:
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auraregen.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auramana.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/auracrit.png"><br>
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/AvianAspect.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/CatAspect.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/CrabAspect.png">
+  <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/SpiderAspect.png"><br>
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofAsh.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofIce.png">
   <img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/HeraldofThunder.png">
@@ -30,7 +34,7 @@ Supported auras:
 
 ## Why yet another calc? Why not use Path of Building?
 
-- all options fit on a single FullHD screen
+- all options fit on a single FullHD screen (if you hide unused stuff)
 - has only useful (for me) options
 - shows more intermediate values
-- made for quick trial-and-error fitting of auras
+- made for quick trial-and-error fitting of auras into mana/life pool
