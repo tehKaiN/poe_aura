@@ -1,5 +1,8 @@
 # Mana reservation calculator for Path of Exile
 
+**This will no longer be updated as recent reservation mechanics updates made aurabots not viable for low-budget builds.
+Use [Path of Building](https://github.com/PathOfBuildingCommunity/PathOfBuilding/) instead**
+
 Supported auras:
 
 <div align="center">
