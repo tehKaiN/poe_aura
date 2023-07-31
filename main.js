@@ -212,7 +212,7 @@ function recalcReserved() {
 				ManaMultiplier = 0;
 			}
 			Reff += getReffFromClustersForAura(AuraName);
-			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) * (100 - (Reff))) / 100;
+			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) / ((100 + Reff) / 100));
 			if(isLife) {
 				ReservedPointsForThisAura = Math.ceil(TotalLife * ReservedPercentForThisAura / 100);
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -274,7 +274,7 @@ function recalcReserved() {
 			var ElementLevel = document.calc[`level_${AuraName}`];
 			var BaseReserved = AuraDef.resvd[ElementLevel.value];
 			$(`#rsvd_${AuraName}`).innerHTML = BaseReserved;
-			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) * (100 - (Reff)) / 100);
+			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) / ((100 + Reff) / 100));
 			var ReservedPercentForThisAura;
 			if(isLife) {
 				ReservedLifePoints += ReservedPointsForThisAura;
