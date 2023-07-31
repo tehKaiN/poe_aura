@@ -10,7 +10,7 @@
 <body>
 	<div class="info">
 		<h2>Summary</h2>
-		<div id="rmr_total"></div>
+		<div id="reff_total"></div>
 		<div id="reserve_life" class="life"></div>
 		<div id="reserve_life_point" class="life"></div>
 		<div id="reserve_mana" class="mana"></div>
@@ -36,33 +36,33 @@
 				<div class="option">
 					<label><img src="img/Wolfhead.png?scale=1" class="icon">Helmet:
 						<select name="item_helmet">
-							<option value="0" data-rmr-min="0" data-rmr-max="5">Rare Helmet (0-5)</option>
-							<option value="1" data-rmr-min="8" data-rmr-max="8">Alpha's Howl (8)</option>
-							<option value="2" id="option_tribunal" data-rmr-min="0" data-rmr-max="0">Mask of the Tribunal (0)</option>
+							<option value="0" data-reff-min="0" data-reff-max="5">Rare Helmet (0-5)</option>
+							<option value="1" data-reff-min="8" data-reff-max="8">Alpha's Howl (8)</option>
+							<option value="2" id="option_tribunal" data-reff-min="0" data-reff-max="0">Mask of the Tribunal (0)</option>
 						</select>
 					</label>
-					<label>RMR: <input name="item_helmet_rmr" class="input_small"></label>
+					<label>Res eff.: <input name="item_helmet_reff" class="input_small"></label>
 				</div>
 
 				<div class="option">
 					<label><img src="img/TheCorundum.png?scale=1" class="icon">Shield:
 						<select name="item_shield">
-							<option value="0" data-rmr-min="0" data-rmr-max="15">Rare Shield (0-15 local)</option>
-							<option value="1" data-rmr-min="25" data-rmr-max="25">Prism Guardian (25 local)</option>
+							<option value="0" data-reff-min="0" data-reff-max="15">Rare Shield (0-15 local)</option>
+							<option value="1" data-reff-min="25" data-reff-max="25">Prism Guardian (25 local)</option>
 						</select>
 					</label>
-					<label>Local RMR: <input name="item_shield_rmr" class="input_small"></label>
+					<label>Local Reff: <input name="item_shield_reff" class="input_small"></label>
 				</div>
 
 				<div class="option">
 					<label><img src="img/Skyforth.png?scale=1" class="icon">Boots:
 						<select name="item_boots">
-							<option value="0" data-rmr-min="0" data-rmr-max="0">Rare Boots (0)</option>
-							<option value="1" data-rmr-min="6" data-rmr-max="6">Skyforth (6)</option>
-							<option value="1" data-rmr-min="100" data-rmr-max="100">March of the Legion (100 local)</option>
+							<option value="0" data-reff-min="0" data-reff-max="0">Rare Boots (0)</option>
+							<option value="1" data-reff-min="6" data-reff-max="6">Skyforth (6)</option>
+							<option value="1" data-reff-min="100" data-reff-max="100">March of the Legion (100 local)</option>
 						</select>
 					</label>
-					<label>RMR: <input name="item_boots_rmr" class="input_small"></label>
+					<label>Res eff.: <input name="item_boots_reff" class="input_small"></label>
 				</div>
 
 				<div class="option">
@@ -75,7 +75,7 @@
 
 				<div class="option">
 					<label><img src="img/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
-					<label><img src="img/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
+					<label><img src="img/CurrencyVaal.png" class="icon" title="Res. eff. implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
 				</div>
 
 				<div class="option">
@@ -84,10 +84,10 @@
 					<span id="bm_mana_mult"></span>
 				</div>
 
-				<div class="option"><label>Jewel <img src="img/CurrencyVaal.png" class="icon" title="RMR implicit"> <input name="item_jew_implrmr" value="0" min="0" max="20" class="input_small" value="1"></label></div>
+				<div class="option"><label>Jewel <img src="img/CurrencyVaal.png" class="icon" title="Res. eff. implicit"> <input name="item_jew_implreff" value="0" min="0" max="20" class="input_small" value="1"></label></div>
 		</div>
 		<div id="passives">
-			<h2>RMR Passives</h2><div id="passive_ctl"></div>
+			<h2>Res. eff. Passives</h2><div id="passive_ctl"></div>
 			<h2>Clusters</h2><div id="cluster_ctl"></div>
 		</div>
 

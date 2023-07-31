@@ -57,7 +57,7 @@ function mergeArrays(Arrays) {
 
 //------------------------------------------------------------------------- MAIN
 
-g_RmrInputs = [];
+g_ReffInputs = [];
 
 g_AurasPercent = {
 	'anger': {name: "Anger", icon: 'aurafire', effect: 'Fire dmg', resvd: 50},
@@ -114,32 +114,32 @@ g_BloodMagic = [ 0,
 ];
 
 g_Passives = {
-	'sov': {name: 'Sovereignty', rmr: [4, 4, 6], icon: 'sovereignty'},
-	'lead': {name: 'Leadership', rmr: [4], icon: 'leadership'},
-	'infl': {name: 'Influence', rmr: [4], icon: 'influence'},
-	'char': {name: 'Charisma', rmr: [4, 8], icon: 'authority'},
-	'cotc': {name: 'Champion of the cause', rmr: [4], icon: 'Champion'}
+	'sov': {name: 'Sovereignty', reff: [4, 4, 6], icon: 'sovereignty'},
+	'lead': {name: 'Leadership', reff: [4], icon: 'leadership'},
+	'infl': {name: 'Influence', reff: [4], icon: 'influence'},
+	'char': {name: 'Charisma', reff: [4, 8], icon: 'authority'},
+	'cotc': {name: 'Champion of the cause', reff: [4], icon: 'Champion'}
 };
 
 g_Clusters = {
-	pure_aptitude: {name: 'Pure Aptitude', affects: 'purlight', rmr: 30, icon: 'LightningResistNotable'},
-	pure_guile: {name: 'Pure Guile', affects: 'purice', rmr: 30, icon: 'ColdResistNotable'},
-	pure_might: {name: 'Pure Might', affects: 'purfire', rmr: 30, icon: 'FireResistNotable'},
-	self_control: {name: 'Self-Control', affects: 'discipline', rmr: 30, icon: 'EnergyShieldNotable'},
-	sublime_form: {name: 'Sublime Form', affects: 'grace', rmr: 30, icon: 'EvasionNotable'},
-	uncompromising: {name: 'Uncompromising', affects: 'determ', rmr: 30, icon: 'ArmourNotable'},
+	pure_aptitude: {name: 'Pure Aptitude', affects: 'purlight', reff: 30, icon: 'LightningResistNotable'},
+	pure_guile: {name: 'Pure Guile', affects: 'purice', reff: 30, icon: 'ColdResistNotable'},
+	pure_might: {name: 'Pure Might', affects: 'purfire', reff: 30, icon: 'FireResistNotable'},
+	self_control: {name: 'Self-Control', affects: 'discipline', reff: 30, icon: 'EnergyShieldNotable'},
+	sublime_form: {name: 'Sublime Form', affects: 'grace', reff: 30, icon: 'EvasionNotable'},
+	uncompromising: {name: 'Uncompromising', affects: 'determ', reff: 30, icon: 'ArmourNotable'},
 };
 
-function getRmrFromClustersForAura(AuraCodeName) {
-	var Rmr = 0;
+function getReffFromClustersForAura(AuraCodeName) {
+	var Reff = 0;
 	for(var ClusterCode in g_Clusters) {
 		var Cluster = g_Clusters[ClusterCode];
 		if(Cluster.affects == AuraCodeName) {
 			// Check how many clusters are enabled
-			Rmr += Cluster.rmr * parseInt(document.calc['cluster_' + ClusterCode].value);
+			Reff += Cluster.reff * parseInt(document.calc['cluster_' + ClusterCode].value);
 		}
 	}
-	return Rmr;
+	return Reff;
 }
 
 function recalcReserved() {
@@ -150,25 +150,25 @@ function recalcReserved() {
 		parseInt(document.calc.char_dex.value) +
 		parseInt(document.calc.char_int.value) + 3 * MaskRoll
 	);
-	var RmrTribunal = Math.floor(Attribs / 250);
-	$('#option_tribunal').dataset.rmrMax = RmrTribunal;
-	$('#option_tribunal').dataset.rmrMin = RmrTribunal;
-	$('#option_tribunal').innerHTML = `Mask of the Tribunal (${RmrTribunal})`;
+	var ReffTribunal = Math.floor(Attribs / 250);
+	$('#option_tribunal').dataset.reffMax = ReffTribunal;
+	$('#option_tribunal').dataset.reffMin = ReffTribunal;
+	$('#option_tribunal').innerHTML = `Mask of the Tribunal (${ReffTribunal})`;
 
-	// Calc global RMR
-	var RmrChar = 0;
-	for(var i = 0; i < g_RmrInputs.length; ++i) {
-		var Input = g_RmrInputs[i];
+	// Calc global Reff
+	var ReffChar = 0;
+	for(var i = 0; i < g_ReffInputs.length; ++i) {
+		var Input = g_ReffInputs[i];
 		if(Input.type == 'checkbox') {
 			if(Input.checked) {
-				RmrChar += parseInt(Input.value);
+				ReffChar += parseInt(Input.value);
 			}
 		}
 		else {
-			RmrChar += parseInt(Input.value);
+			ReffChar += parseInt(Input.value);
 		}
 	}
-	$('#rmr_total').innerHTML = `Tree + inventory RMR: ${RmrChar}%`;
+	$('#reff_total').innerHTML = `Tree + inventory Reservation Efficiency: ${ReffChar}%`;
 
 	// Blood magic multiplier
 	var BloodMagicMult = g_BloodMagic[document.calc.bm_lvl.value];
@@ -187,11 +187,11 @@ function recalcReserved() {
 		if(InputGroup.value != 'off') {
 			++AurasEnabled;
 			var ManaMultiplier = 100;
-			var Rmr = RmrChar;
+			var Reff = ReffChar;
 			var isLife = false;
 			if(InputGroup.value == 'pg') {
 				// Prism guardian
-				Rmr += 25;
+				Reff += 25;
 				isLife = true;
 			}
 			else if(InputGroup.value == 'bm') {
@@ -199,15 +199,15 @@ function recalcReserved() {
 				ManaMultiplier *= BloodMagicMult / 100;
 				isLife = true;
 				if(document.calc.bm_qty.checked) {
-					Rmr += 1;
+					Reff += 1;
 				}
 			}
 			else if(InputGroup.value == 'ml') {
 				// March of the Legion
 				ManaMultiplier = 0;
 			}
-			Rmr += getRmrFromClustersForAura(AuraName);
-			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) * (100 - (Rmr))) / 100;
+			Reff += getReffFromClustersForAura(AuraName);
+			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) * (100 - (Reff))) / 100;
 			if(isLife) {
 				ReservedPointsForThisAura = Math.ceil(TotalLife * ReservedPercentForThisAura / 100);
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -249,11 +249,11 @@ function recalcReserved() {
 		if(InputGroup.value != 'off') {
 			++AurasEnabled;
 			var ManaMultiplier = 100;
-			var Rmr = RmrChar;
+			var Reff = ReffChar;
 			var isLife = false;
 			if(InputGroup.value == 'pg') {
 				// Prism guardian
-				Rmr += 25;
+				Reff += 25;
 				isLife = true;
 			}
 			else if(InputGroup.value == 'bm') {
@@ -269,7 +269,7 @@ function recalcReserved() {
 			var ElementLevel = document.calc[`level_${AuraName}`];
 			var BaseReserved = AuraDef.resvd[ElementLevel.value];
 			$(`#rsvd_${AuraName}`).innerHTML = BaseReserved;
-			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) * (100 - (Rmr)) / 100);
+			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) * (100 - (Reff)) / 100);
 			var ReservedPercentForThisAura;
 			if(isLife) {
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -327,24 +327,24 @@ function initUiPassives() {
 	// Create passives checkboxes
 	for(var PassiveCode in g_Passives) {
 		var Passive = g_Passives[PassiveCode];
-		var RmrString = '';
-		var RmrTotal = 0;
-		if (typeof(Passive.rmr) == 'number') {
-			Passive.rmr = [Passive.rmr];
+		var ReffString = '';
+		var ReffTotal = 0;
+		if (typeof(Passive.reff) == 'number') {
+			Passive.reff = [Passive.reff];
 		}
-		for(var RmrNode of Passive.rmr) {
-			RmrTotal += RmrNode;
-			if(RmrString.length) {
-				RmrString += ' + ';
+		for(var ReffNode of Passive.reff) {
+			ReffTotal += ReffNode;
+			if(ReffString.length) {
+				ReffString += ' + ';
 			}
-			RmrString += RmrNode;
+			ReffString += ReffNode;
 		}
 		var Div = document.createElement('div');
 		Div.classList.add('option');
 		Div.innerHTML = `
 			<label>
 			<img src="img/${Passive.icon}.webp" class="icon">
-			${Passive.name} (${RmrString})<input type="checkbox" name="passive_${PassiveCode}" value="${RmrTotal}">
+			${Passive.name} (${ReffString})<input type="checkbox" name="passive_${PassiveCode}" value="${ReffTotal}">
 			</label>
 		`;
 		$('#passive_ctl').appendChild(Div);
@@ -368,7 +368,7 @@ function initUiClusters() {
 		Div.innerHTML = `
 			<label>
 			<img src="img/${Cluster.icon}.webp" class="icon">
-			${Cluster.name} (${AffectsName} ${Cluster.rmr}%)
+			${Cluster.name} (${AffectsName} ${Cluster.reff}%)
 			<input class="cluster" name="cluster_${ClusterCode}" value="0" min="0" max="5">
 			</label>
 		`;
@@ -481,7 +481,7 @@ g_ExportFields = [
 	{input_name: 'cluster_self_control', type: 'radio'},
 	{input_name: 'cluster_sublime_form', type: 'radio'},
 	{input_name: 'cluster_uncompromising', type: 'radio'},
-	{input_name: 'item_jew_implrmr', type: 'radio'},
+	{input_name: 'item_jew_implreff', type: 'radio'},
 	{input_name: 'group_heraldash', type: 'radio'},
 	{input_name: 'group_heraldice', type: 'radio'},
 	{input_name: 'group_heraldthunder', type: 'radio'},
@@ -658,17 +658,17 @@ function calcMain() {
 	initUiAuraPercent('Heralds', ['heraldash', 'heraldice', 'heraldthunder', 'heraldpurity', 'heraldagony']);
 	initUiAuraPercent('Aspects', ['aspectavian', 'aspectcat', 'aspectcrab', 'aspectspider']);
 
-	// Get all RMR inventory/passive inputs
+	// Get all Reff inventory/passive inputs
 	var Inputs = $$('input[name^="passive_"]');
 	for(var i = 0; i < Inputs.length; ++i) {
-		g_RmrInputs.push(Inputs[i]);
+		g_ReffInputs.push(Inputs[i]);
 	}
 	var Inputs = $$('input[name^="item_"]');
 	for(var i = 0; i < Inputs.length; ++i) {
-		g_RmrInputs.push(Inputs[i]);
+		g_ReffInputs.push(Inputs[i]);
 	}
 
-	makeSensitiveToChange(g_RmrInputs);
+	makeSensitiveToChange(g_ReffInputs);
 	makeSensitiveToChange($$('input[name^="group_"'));
 	makeSensitiveToChange($$('input[name^="group_point_"'));
 	makeSensitiveToChange($$('input[name^="cluster_"]'));
