@@ -26,34 +26,65 @@
 	<form name="calc">
 		<div id="char">
 			<h2>Character</h2>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusstrength.png?scale=1" class="icon round">Strength <input name="char_str" value="100" class="char_stats"></label></div>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusdexterity.png?scale=1" class="icon round">Dexterity <input name="char_dex" value="100" class="char_stats"></label></div>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/plusintelligence.png?scale=1" class="icon round">Intelligence <input name="char_int" value="100" class="char_stats"></label></div>
+				<div class="option"><label><img src="img/plusstrength.png" class="icon round">Strength <input name="char_str" value="100" class="char_stats"></label></div>
+				<div class="option"><label><img src="img/plusdexterity.png" class="icon round">Dexterity <input name="char_dex" value="100" class="char_stats"></label></div>
+				<div class="option"><label><img src="img/plusintelligence.png" class="icon round">Intelligence <input name="char_int" value="100" class="char_stats"></label></div>
 				<div class="option"><label>Life <input name="char_life" value="1000" class="char_stats"></label></div>
 				<div class="option"><label>Mana <input name="char_mana" value="1000" class="char_stats"></label></div>
 
-			<h2>RMR Inventory</h2>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/Wolfhead.png?scale=1" class="icon">Alpha's Howl (8)<input type="checkbox" name="item_alpha" value="8"></label></div>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Helmets/HelmetOfDominance2.png?synthesised=1&scale=1" class="icon">Mask of the tribunal <span id="item_mask_res"></span><input type="checkbox" name="item_mask"></label></div>
+			<h2>Inventory</h2>
 				<div class="option">
-					<label><img src="https://web.poecdn.com/image/item/popup/redeemer-symbol.png?scale=1" class="icon">Amulet <input name="item_amulet_redeemer" value="0" min="0" max="5" class="input_small"></label>
-					<label><img src="https://web.poecdn.com/image/Art/2DItems/Currency/Catalysts/FertileCatalyst.png" title="Fertile catalyst" class="icon"> (1)<input type="checkbox" name="item_amulet_fertile" value="1"></label>
-					<label><img src="https://web.poecdn.com/image/Art/2DItems/Amulets/HeistAmulet2.png" title="Simplex implicit: 25% increased Explicit Modifier magnitudes" class="icon"> (1)<input type="checkbox" name="item_amulet_simplex" value="1"></label>
+					<label><img src="img/Wolfhead.png?scale=1" class="icon">Helmet:
+						<select name="item_helmet">
+							<option value="0" data-rmr-min="0" data-rmr-max="5">Rare Helmet (0-5)</option>
+							<option value="1" data-rmr-min="8" data-rmr-max="8">Alpha's Howl (8)</option>
+							<option value="2" id="option_tribunal" data-rmr-min="0" data-rmr-max="0">Mask of the Tribunal (0)</option>
+						</select>
+					</label>
+					<label>RMR: <input name="item_helmet_rmr" class="input_small"></label>
 				</div>
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/BodyArmours/AvianBodyArmour.png?scale=1" class="icon">Saqawal's nest <input name="item_saqawal" value="0" min="0" max="10" class="input_small"></label></div>
-				<!-- <div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Shields/ShieldStrInt5.png?scale=1" class="icon">RMR shield<input name="item_shield" value="0" min="0" max="15" class="input_small"></label></div> -->
-				<div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/Skyforth.png?scale=1" class="icon">Skyforth (6)<input type="checkbox" name="item_skyforth" value="6"></label></div>
-				<!-- <div class="option"><label><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/AuraBoots.png?scale=1" class="icon">March of the Legion <input type="checkbox" name="item_marchoflegion" value="0"></label></div> -->
+
 				<div class="option">
-					<label><img src="https://web.poecdn.com/image/Art/2DItems/Jewels/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
-					<label><img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
+					<label><img src="img/TheCorundum.png?scale=1" class="icon">Shield:
+						<select name="item_shield">
+							<option value="0" data-rmr-min="0" data-rmr-max="15">Rare Shield (0-15 local)</option>
+							<option value="1" data-rmr-min="25" data-rmr-max="25">Prism Guardian (25 local)</option>
+						</select>
+					</label>
+					<label>Local RMR: <input name="item_shield_rmr" class="input_small"></label>
 				</div>
+
 				<div class="option">
-					<label><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1" class="icon">Arrogance lvl <input name="bm_lvl" value="20" min="1" max="40" class="input_small"></label>
+					<label><img src="img/Skyforth.png?scale=1" class="icon">Boots:
+						<select name="item_boots">
+							<option value="0" data-rmr-min="0" data-rmr-max="0">Rare Boots (0)</option>
+							<option value="1" data-rmr-min="6" data-rmr-max="6">Skyforth (6)</option>
+							<option value="1" data-rmr-min="100" data-rmr-max="100">March of the Legion (100 local)</option>
+						</select>
+					</label>
+					<label>RMR: <input name="item_boots_rmr" class="input_small"></label>
+				</div>
+
+				<div class="option">
+					<label><img src="img/redeemer-symbol.png?scale=1" class="icon">Amulet <input name="item_amulet_redeemer" value="0" min="0" max="5" class="input_small"></label>
+					<label><img src="img/FertileCatalyst.png" title="Fertile catalyst" class="icon"> (1)<input type="checkbox" name="item_amulet_fertile" value="1"></label>
+					<label><img src="img/HeistAmulet2.png" title="Simplex implicit: 25% increased Explicit Modifier magnitudes" class="icon"> (1)<input type="checkbox" name="item_amulet_simplex" value="1"></label>
+				</div>
+
+				<div class="option"><label><img src="img/AvianBodyArmour.png?scale=1" class="icon">Saqawal's nest <input name="item_saqawal" value="0" min="0" max="10" class="input_small"></label></div>
+
+				<div class="option">
+					<label><img src="img/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
+					<label><img src="img/CurrencyVaal.png" class="icon" title="RMR implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
+				</div>
+
+				<div class="option">
+					<label><img src="img/BloodMagic.png?scale=1" class="icon">Arrogance lvl <input name="bm_lvl" value="20" min="1" max="40" class="input_small"></label>
 					<label>Anomalous (1) <input type="checkbox" name="bm_qty"></label>
 					<span id="bm_mana_mult"></span>
 				</div>
-				<div class="option"><label>Jewel <img src="https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyVaal.png" class="icon" title="RMR implicit"> <input name="item_jew_implrmr" value="0" min="0" max="20" class="input_small" value="1"></label></div>
+
+				<div class="option"><label>Jewel <img src="img/CurrencyVaal.png" class="icon" title="RMR implicit"> <input name="item_jew_implrmr" value="0" min="0" max="20" class="input_small" value="1"></label></div>
 		</div>
 		<div id="passives">
 			<h2>RMR Passives</h2><div id="passive_ctl"></div>
@@ -69,9 +100,9 @@
 						<th>Base val</th>
 						<th>Off</th>
 						<th>Mana</th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1" title="Arrogance" class="icon"></th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Shields/TheCorundum.png?scale=1" title="Prism Guardian" class="icon"></th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/AuraBoots.png?scale=1" title="March of the Legion" class="icon"></th>
+						<th><img src="img/BloodMagic.png?scale=1" title="Arrogance" class="icon"></th>
+						<th><img src="img/TheCorundum.png?scale=1" title="Prism Guardian" class="icon"></th>
+						<th><img src="img/AuraBoots.png?scale=1" title="March of the Legion" class="icon"></th>
 						<th>Reserved</th>
 					</tr>
 				</table>

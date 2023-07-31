@@ -151,8 +151,9 @@ function recalcReserved() {
 		parseInt(document.calc.char_int.value) + 3 * MaskRoll
 	);
 	var RmrTribunal = Math.floor(Attribs / 250);
-	document.calc.item_mask.value = RmrTribunal;
-	$('#item_mask_res').innerHTML = `(${RmrTribunal})`;
+	$('#option_tribunal').dataset.rmrMax = RmrTribunal;
+	$('#option_tribunal').dataset.rmrMin = RmrTribunal;
+	$('#option_tribunal').innerHTML = `Mask of the Tribunal (${RmrTribunal})`;
 
 	// Calc global RMR
 	var RmrChar = 0;
@@ -342,7 +343,7 @@ function initUiPassives() {
 		Div.classList.add('option');
 		Div.innerHTML = `
 			<label>
-			<img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/${Passive.icon}.png?scale=1" class="icon">
+			<img src="img/${Passive.icon}.webp" class="icon">
 			${Passive.name} (${RmrString})<input type="checkbox" name="passive_${PassiveCode}" value="${RmrTotal}">
 			</label>
 		`;
@@ -366,7 +367,7 @@ function initUiClusters() {
 		Div.classList.add('option');
 		Div.innerHTML = `
 			<label>
-			<img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/passives/${Cluster.icon}.png?scale=1" class="icon">
+			<img src="img/${Cluster.icon}.webp" class="icon">
 			${Cluster.name} (${AffectsName} ${Cluster.rmr}%)
 			<input class="cluster" name="cluster_${ClusterCode}" value="0" min="0" max="5">
 			</label>
@@ -381,7 +382,7 @@ function initUiAuraPoints() {
 		var Aura = g_AurasPoints[AuraCode];
 		var Row = document.createElement('tr');
 		Row.innerHTML = `
-			<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/${Aura.icon}.png?" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
+			<td><img src="img/${Aura.icon}.webp" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
 			<td><input name="level_${AuraCode}" value="20" min="1" max="40" class="input_small"></td>
 			<td id="rsvd_${AuraCode}"></td>
 			<td><label><input type="radio" name="group_point_${AuraCode}" value="off" checked="checked"></label></td>
@@ -406,7 +407,7 @@ function initUiAuraPercent(Label, AuraCodes) {
 		var Aura = g_AurasPercent[AuraCode];
 		Row = document.createElement('tr');
 		Row.innerHTML = `
-			<td><img src="https://web.poecdn.com/image/Art/2DArt/SkillIcons/${Aura.icon}.png?" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
+			<td><img src="img/${Aura.icon}.webp" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
 			<td>${Aura.resvd}</td>
 			<td><label><input type="radio" name="group_${AuraCode}" value="off" checked="checked"></label></td>
 			<td><label><input type="radio" name="group_${AuraCode}" value="mana"></label></td>
