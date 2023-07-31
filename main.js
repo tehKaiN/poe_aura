@@ -159,14 +159,19 @@ function recalcReserved() {
 	var ReffChar = 0;
 	for(var i = 0; i < g_ReffInputs.length; ++i) {
 		var Input = g_ReffInputs[i];
+		let ReffInput = 0;
 		if(Input.type == 'checkbox') {
 			if(Input.checked) {
-				ReffChar += parseInt(Input.value);
+				ReffInput = parseInt(Input.value);
 			}
 		}
 		else {
-			ReffChar += parseInt(Input.value);
+			ReffInput = parseInt(Input.value);
 		}
+		if(isNaN(ReffInput)) {
+			ReffInput = 0;
+		}
+		ReffChar += ReffInput;
 	}
 	$('#reff_total').innerHTML = `Tree + inventory Reservation Efficiency: ${ReffChar}%`;
 
