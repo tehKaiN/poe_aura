@@ -34,61 +34,107 @@
 
 			<h2>Inventory</h2>
 				<div class="option">
-					<label><img src="img/Wolfhead.png?scale=1" class="icon">Helmet:
-						<select name="item_helmet">
-							<option value="0" data-reff-min="0" data-reff-max="5">Rare Helmet (0-5)</option>
-							<option value="1" data-reff-min="8" data-reff-max="8">Alpha's Howl (8)</option>
-							<option value="2" id="option_tribunal" data-reff-min="0" data-reff-max="0">Mask of the Tribunal (0)</option>
+					<label><img src="img/Wolfhead.png" class="icon">Helmet:
+						<select name="eq_helmet">
+							<option value="0" data-reff-min="0" data-reff-max="22" data-reff-is-local="0">Rare Helmet (0-10 + 7-12)</option>
+							<option value="1" data-reff-min="16" data-reff-max="16" data-reff-is-local="0">Alpha's Howl (16)</option>
+							<option value="2" data-reff-min="16" data-reff-max="16" data-reff-is-local="1">Devouring Diadem (local, 25)</option>
+							<option value="4" id="option_tribunal" data-reff-min="0" data-reff-max="0" data-reff-is-local="0">Mask of the Tribunal (0)</option>
 						</select>
 					</label>
-					<label>Res eff.: <input name="item_helmet_reff" class="input_small"></label>
+					<label>RE: <input name="reff_helmet" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_helmet"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_helmet"></label>
 				</div>
 
 				<div class="option">
-					<label><img src="img/TheCorundum.png?scale=1" class="icon">Shield:
-						<select name="item_shield">
-							<option value="0" data-reff-min="0" data-reff-max="15">Rare Shield (0-15 local)</option>
-							<option value="1" data-reff-min="25" data-reff-max="25">Prism Guardian (25 local)</option>
+					<label><img src="img/AvianBodyArmour.png" class="icon">Body armour:
+						<select name="eq_body">
+							<option value="0" data-reff-min="0" data-reff-max="10" data-reff-is-local="0">Rare Body Armour (0-10)</option>
+							<option value="1" data-reff-min="12" data-reff-max="20" data-reff-is-local="0">Saqawal's Nest (12-20)</option>
+							<option value="2" data-reff-min="45" data-reff-max="45" data-reff-is-local="1">Victario (local, 45)</option>
 						</select>
 					</label>
-					<label>Local Reff: <input name="item_shield_reff" class="input_small"></label>
+					<label>RE: <input name="body_reff" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_body"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_body"></label>
 				</div>
 
 				<div class="option">
-					<label><img src="img/Skyforth.png?scale=1" class="icon">Boots:
-						<select name="item_boots">
-							<option value="0" data-reff-min="0" data-reff-max="0">Rare Boots (0)</option>
-							<option value="1" data-reff-min="6" data-reff-max="6">Skyforth (6)</option>
-							<option value="1" data-reff-min="100" data-reff-max="100">March of the Legion (100 local)</option>
+					<label><img src="img/BladeOfVastri.webp" class="icon">Weapon:
+						<select name="eq_weapon">
+							<option value="0" data-reff-min="0" data-reff-max="0" data-reff-is-local="0">Rare Weapon (0)</option>
+							<option value="1" data-reff-min="10" data-reff-max="10" data-reff-is-local="0">Ichimonji (10)</option>
 						</select>
 					</label>
-					<label>Res eff.: <input name="item_boots_reff" class="input_small"></label>
+					<label>RE: <input name="reff_weapon" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_weapon"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_weapon"></label>
 				</div>
 
 				<div class="option">
-					<label><img src="img/redeemer-symbol.png?scale=1" class="icon">Amulet <input name="item_amulet_redeemer" value="0" min="0" max="5" class="input_small"></label>
-					<label><img src="img/FertileCatalyst.png" title="Fertile catalyst" class="icon"> (1)<input type="checkbox" name="item_amulet_fertile" value="1"></label>
-					<label><img src="img/HeistAmulet2.png" title="Simplex implicit: 25% increased Explicit Modifier magnitudes" class="icon"> (1)<input type="checkbox" name="item_amulet_simplex" value="1"></label>
+					<label><img src="img/TheCorundum.png" class="icon">Shield:
+						<select name="eq_shield">
+							<option value="0" data-reff-min="0" data-reff-max="30" data-reff-is-local="1">Rare Shield (local, 0-30)</option>
+							<option value="1" data-reff-min="30" data-reff-max="30" data-reff-is-local="1">Prism Guardian local, (30)</option>
+						</select>
+					</label>
+					<label>RE: <input name="reff_shield" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_shield"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_shield"></label>
 				</div>
 
-				<div class="option"><label><img src="img/AvianBodyArmour.png?scale=1" class="icon">Saqawal's nest <input name="item_saqawal" value="0" min="0" max="10" class="input_small"></label></div>
-
 				<div class="option">
-					<label><img src="img/HighQuestRewardRed.png?scale=1" class="icon">Conqueror's efficiency (2)<input type="checkbox" name="item_conq" value="2"></label>
-					<label><img src="img/CurrencyVaal.png" class="icon" title="Res. eff. implicit"> (1)<input type="checkbox" name="item_conq_impljew" value="1"></label>
+					<label><img src="img/ShapersGloves.webp" class="icon">Gloves:
+						<select name="eq_gloves">
+							<option value="0" data-reff-min="0" data-reff-max="0" data-reff-is-local="0">Rare Gloves (0)</option>
+						</select>
+					</label>
+					<label>RE: <input name="reff_gloves" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_gloves"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_gloves"></label>
 				</div>
 
 				<div class="option">
-					<label><img src="img/BloodMagic.png?scale=1" class="icon">Arrogance lvl <input name="bm_lvl" value="20" min="1" max="40" class="input_small"></label>
+					<label><img src="img/AuraBoots.png" class="icon">Boots:
+						<select name="eq_boots">
+							<option value="0" data-reff-min="0" data-reff-max="0" data-reff-is-local="0">Rare Boots (0)</option>
+							<option value="1" data-reff-min="16" data-reff-max="24" data-reff-is-local="0">Bubonic Trail (16-24)</option>
+							<option value="2" data-reff-min="6" data-reff-max="12" data-reff-is-local="0">Skyforth (12)</option>
+							<option value="3" data-reff-min="100" data-reff-max="100" data-reff-is-local="1">March of the Legion (local, 100)</option>
+						</select>
+					</label>
+					<label>RE: <input name="reff_boots" class="input_small"></label>
+					<label><img src="img/BloodMagic.png" class="icon"> <input type="checkbox" name="bm_boots"></label>
+					<label><img src="img/Enlighten.webp" class="icon"> <input class="input_small" min="0" max="4" name="en_boots"></label>
+				</div>
+
+				<div class="option">
+					<label><img src="img/MasterOfGems.webp" class="icon">Amulet:
+						<select name="eq_amulet">
+							<option value="0" data-reff-min="6" data-reff-max="10" data-reff-is-local="0">Rare Amulet (6-10)</option>
+							<option value="1" data-reff-min="10" data-reff-max="20" data-reff-is-local="0">Ashes of the Stars (10-20)</option>
+						</select>
+					</label>
+					<label>RE: <input name="reff_amulet" class="input_small"></label>
+					<label><img src="img/FertileCatalyst.png" class="icon"> <input type="checkbox" name="catalyst_amulet"></label>
+				</div>
+
+				<hr>
+
+				<div class="option">
+					<label><img src="img/BloodMagic.png" class="icon">Arrogance lvl <input name="bm_lvl" value="20" min="1" max="40" class="input_small"></label>
 					<label>Anomalous (1) <input type="checkbox" name="bm_qty"></label>
 					<span id="bm_mana_mult"></span>
 				</div>
 
-				<div class="option"><label>Jewel <img src="img/CurrencyVaal.png" class="icon" title="Res. eff. implicit"> <input name="item_jew_implreff" value="0" min="0" max="20" class="input_small" value="1"></label></div>
+				<div class="option"><label><img src="img/HighQuestRewardRed.png" class="icon" title="RE implicit"> Jewel RE implicits <input name="jewel_implreff" value="0" min="0" max="20" class="input_small"></label></div>
 		</div>
 		<div id="passives">
-			<h2>Res. eff. Passives</h2><div id="passive_ctl"></div>
+			<h2>RE Passives</h2><div id="passive_ctl"></div>
 			<h2>Clusters</h2><div id="cluster_ctl"></div>
+			<div class="option"><label><img src="img/AuraEffectNotable.webp" class="icon" title="Small RE nodes"> Small RE nodes (6% each) <input name="clusters_small" value="0" min="0" max="20" class="input_small"></label></div>
+
 		</div>
 
 		<div class="aura_table point_based">
@@ -99,10 +145,12 @@
 						<th>Level</th>
 						<th>Base val</th>
 						<th>Off</th>
-						<th>Mana</th>
-						<th><img src="img/BloodMagic.png?scale=1" title="Arrogance" class="icon"></th>
-						<th><img src="img/TheCorundum.png?scale=1" title="Prism Guardian" class="icon"></th>
-						<th><img src="img/AuraBoots.png?scale=1" title="March of the Legion" class="icon"></th>
+						<th><img src="img/Wolfhead.png" class="icon" title="Helmet"></th>
+						<th><img src="img/AvianBodyArmour.png" title="Armour" class="icon"></th>
+						<th><img src="img/BladeOfVastri.webp" title="Weapon" class="icon"></th>
+						<th><img src="img/TheCorundum.png" title="Shield" class="icon"></th>
+						<th><img src="img/ShapersGloves.webp" title="Gloves" class="icon"></th>
+						<th><img src="img/AuraBoots.png" title="Boots" class="icon"></th>
 						<th>Reserved</th>
 					</tr>
 				</table>
@@ -115,10 +163,12 @@
 						<th>Aura</th><th>Effect</th>
 						<th>Base %</th>
 						<th>Off</th>
-						<th>Mana</th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Gems/Support/BloodMagic.png?scale=1" title="Arrogance" class="icon"></th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Shields/TheCorundum.png?scale=1" title="Prism Guardian" class="icon"></th>
-						<th><img src="https://web.poecdn.com/image/Art/2DItems/Armours/Boots/AuraBoots.png?scale=1" title="March of the Legion" class="icon"></th>
+						<th><img src="img/Wolfhead.png" class="icon" title="Helmet"></th>
+						<th><img src="img/AvianBodyArmour.png" title="Armour" class="icon"></th>
+						<th><img src="img/BladeOfVastri.webp" title="Weapon" class="icon"></th>
+						<th><img src="img/TheCorundum.png" title="Shield" class="icon"></th>
+						<th><img src="img/ShapersGloves.webp" title="Gloves" class="icon"></th>
+						<th><img src="img/AuraBoots.png" title="Boots" class="icon"></th>
 						<th>Reserved</th>
 					</tr>
 				</table>

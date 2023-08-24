@@ -5,16 +5,16 @@ $$ = function(x) {return document.querySelectorAll(x);};
 
 function bitsToBytes(Bits) {
 	// Expand array to have round amount of bits, fill with zeros
-	var Expanded = [...Bits];
+	let Expanded = [...Bits];
 	while(Expanded.length % 8 != 0) {
 		Expanded.push(0);
 	}
 
 	// Pack to bytes
-	var Bytes = new Uint8Array(Expanded.length / 8);
-	var BytePos = 0;
-	var BitPos = 0;
-	for(Bit of Expanded) {
+	let Bytes = new Uint8Array(Expanded.length / 8);
+	let BytePos = 0;
+	let BitPos = 0;
+	for(let Bit of Expanded) {
 		Bytes[BytePos] = (Bytes[BytePos] << 1) | Bit;
 		if(++BitPos == 8) {
 			BitPos = 0;
@@ -25,8 +25,8 @@ function bitsToBytes(Bits) {
 }
 
 function bytesToBits(Bytes) {
-	var Bits = [];
-	for(Byte of Bytes) {
+	let Bits = [];
+	for(let Byte of Bytes) {
 		for(ByteBit = 128; ByteBit > 0; ByteBit >>= 1) {
 			if(Byte & ByteBit) {
 				Bits.push(1);
@@ -40,14 +40,14 @@ function bytesToBits(Bytes) {
 }
 
 function mergeArrays(Arrays) {
-	var TotalLength = 0;
-	for(Arr of Arrays) {
+	let TotalLength = 0;
+	for(let Arr of Arrays) {
 		TotalLength += Arr.byteLength;
 		console.log('addlength: ' + Arr.byteLength);
 	}
 
-	var Out = new Uint8Array(TotalLength);
-	var Offs = 0;
+	let Out = new Uint8Array(TotalLength);
+	let Offs = 0;
 	for(Arr of Arrays) {
 		Out.set(Arr, Offs);
 		Offs += Arr.byteLength;
@@ -68,7 +68,7 @@ g_AurasPercent = {
 	'hatred': {name: "Hatred", icon: 'auracold', effect: 'Cold dmg', resvd: 50},
 	'malev': {name: "Malevolence", icon: 'DeliriumAura', effect: 'DoT, skill dur', resvd: 50},
 	'pride': {name: "Pride", icon: 'auradamage', effect: 'Phys dmg', resvd: 50},
-	'purele': {name: "Purity of Elements", icon: 'auraresist', effect: 'Res', resvd: 35},
+	'purele': {name: "Purity of Elements", icon: 'auraresist', effect: 'Res', resvd: 50},
 	'purfire': {name: "Purity of Fire", abbr: 'PoF', icon: 'aurafireresist', effect: 'Res', resvd: 35},
 	'purice': {name: "Purity of Ice", abbr: 'PoI', icon: 'auracoldresist', effect: 'Res', resvd: 35},
 	'purlight': {name: "Purity of Lightning", abbr: 'PoL', icon: 'auralightningresist', effect: 'Res', resvd: 35},
@@ -114,26 +114,36 @@ g_BloodMagic = [ 0,
 ];
 
 g_Passives = {
-	'sov': {name: 'Sovereignty', reff: [4, 4, 6], icon: 'sovereignty'},
-	'lead': {name: 'Leadership', reff: [4], icon: 'leadership'},
-	'infl': {name: 'Influence', reff: [4], icon: 'influence'},
-	'char': {name: 'Charisma', reff: [4, 8], icon: 'authority'},
-	'cotc': {name: 'Champion of the cause', reff: [4], icon: 'Champion'}
+	'sov': {name: 'Sovereignty', reff: [8, 8, 12], icon: 'sovereignty'},
+	'lead': {name: 'Leadership', reff: [8], icon: 'leadership'},
+	'infl': {name: 'Influence', reff: [8], icon: 'influence'},
+	'char': {name: 'Charisma', reff: [8, 16], icon: 'authority'},
+	'cotc': {name: 'Champion of the Cause', reff: [8], icon: 'Champion'},
+	'thought': {name: 'Sanctuary of Thought', reff: [25], icon: 'MindOverBeing'}
 };
 
 g_Clusters = {
-	pure_aptitude: {name: 'Pure Aptitude', affects: 'purlight', reff: 30, icon: 'LightningResistNotable'},
-	pure_guile: {name: 'Pure Guile', affects: 'purice', reff: 30, icon: 'ColdResistNotable'},
-	pure_might: {name: 'Pure Might', affects: 'purfire', reff: 30, icon: 'FireResistNotable'},
-	self_control: {name: 'Self-Control', affects: 'discipline', reff: 30, icon: 'EnergyShieldNotable'},
-	sublime_form: {name: 'Sublime Form', affects: 'grace', reff: 30, icon: 'EvasionNotable'},
-	uncompromising: {name: 'Uncompromising', affects: 'determ', reff: 30, icon: 'ArmourNotable'},
+	destructive_aspect: {name: 'Destructive Aspect', affects: 'pride', reff: 50, icon: 'AuraEffectNotable'},
+	electric_presence: {name: 'Electric Presence', affects: 'wrath', reff: 50, icon: 'AuraEffectNotable'},
+	frantic_presence: {name: 'Frantic Aspect', affects: 'haste', reff: 50, icon: 'AuraEffectNotable'},
+	// TODO: forbidden words: curse auras
+	// TODO: master of command: banners
+	mortifying_aspect: {name: 'Mortifying Aspect', affects: 'malev', reff: 50, icon: 'AuraEffectNotable'},
+	pure_aptitude: {name: 'Pure Aptitude', affects: 'purlight', reff: 80, icon: 'LightningResistNotable'},
+	pure_guile: {name: 'Pure Guile', affects: 'purice', reff: 80, icon: 'ColdResistNotable'},
+	pure_might: {name: 'Pure Might', affects: 'purfire', reff: 80, icon: 'FireResistNotable'},
+	righteous_path: {name: 'Righteous Path', affects: 'zeal', reff: 50, icon: 'AuraEffectNotable'},
+	self_control: {name: 'Self-Control', affects: 'discipline', reff: 80, icon: 'EnergyShieldNotable'},
+	spiteful_presence: {name: 'Spiteful Presence', affects: 'hatred', reff: 50, icon: 'AuraEffectNotable'},
+	sublime_form: {name: 'Sublime Form', affects: 'grace', reff: 50, icon: 'EvasionNotable'},
+	uncompromising: {name: 'Uncompromising', affects: 'determ', reff: 50, icon: 'ArmourNotable'},
+	volatile_presence: {name: 'Volatile Presence', affects: 'anger', reff: 50, icon: 'AuraEffectNotable'},
 };
 
 function getReffFromClustersForAura(AuraCodeName) {
-	var Reff = 0;
-	for(var ClusterCode in g_Clusters) {
-		var Cluster = g_Clusters[ClusterCode];
+	let Reff = 0;
+	for(let ClusterCode in g_Clusters) {
+		let Cluster = g_Clusters[ClusterCode];
 		if(Cluster.affects == AuraCodeName) {
 			// Check how many clusters are enabled
 			Reff += Cluster.reff * parseInt(document.calc['cluster_' + ClusterCode].value);
@@ -144,21 +154,21 @@ function getReffFromClustersForAura(AuraCodeName) {
 
 function recalcReserved() {
 	// Calc mask of the tribunal
-	var MaskRoll = 25;
-	var Attribs = (
+	let MaskRoll = 25;
+	let Attribs = (
 		parseInt(document.calc.char_str.value) +
 		parseInt(document.calc.char_dex.value) +
 		parseInt(document.calc.char_int.value) + 3 * MaskRoll
 	);
-	var ReffTribunal = Math.floor(Attribs / 250);
+	let ReffTribunal = 2 * Math.floor(Attribs / 250);
 	$('#option_tribunal').dataset.reffMax = ReffTribunal;
 	$('#option_tribunal').dataset.reffMin = ReffTribunal;
 	$('#option_tribunal').innerHTML = `Mask of the Tribunal (${ReffTribunal})`;
 
 	// Calc global Reff
-	var ReffChar = 0;
-	for(var i = 0; i < g_ReffInputs.length; ++i) {
-		var Input = g_ReffInputs[i];
+	let ReffChar = 0;
+	for(let i = 0; i < g_ReffInputs.length; ++i) {
+		let Input = g_ReffInputs[i];
 		let ReffInput = 0;
 		if(Input.type == 'checkbox') {
 			if(Input.checked) {
@@ -176,24 +186,24 @@ function recalcReserved() {
 	$('#reff_total').innerHTML = `Tree + inventory Reservation Efficiency: ${ReffChar}%`;
 
 	// Blood magic multiplier
-	var BloodMagicMult = g_BloodMagic[document.calc.bm_lvl.value];
+	let BloodMagicMult = g_BloodMagic[document.calc.bm_lvl.value];
 	$('#bm_mana_mult').innerHTML = `Multiplier: ${BloodMagicMult}%`;
 
 	// Calc reservation
-	var TotalLife = parseInt(document.calc.char_life.value);
-	var TotalMana = parseInt(document.calc.char_mana.value);
-	var ReservedManaPoints = 0;
-	var ReservedLifePoints = 0;
-	var AurasEnabled = 0;
-	for(var AuraName in  g_AurasPercent) {
-		var AuraDef = g_AurasPercent[AuraName];
-		var InputGroup = document.calc['group_' + AuraName];
-		var ElementReserved = $(`#reserved_${AuraName}`);
+	let TotalLife = parseInt(document.calc.char_life.value);
+	let TotalMana = parseInt(document.calc.char_mana.value);
+	let ReservedManaPoints = 0;
+	let ReservedLifePoints = 0;
+	let AurasEnabled = 0;
+	for(let AuraName in  g_AurasPercent) {
+		let AuraDef = g_AurasPercent[AuraName];
+		let InputGroup = document.calc['group_' + AuraName];
+		let ElementReserved = $(`#reserved_${AuraName}`);
 		if(InputGroup.value != 'off') {
 			++AurasEnabled;
-			var ManaMultiplier = 100;
-			var Reff = ReffChar;
-			var isLife = false;
+			let ManaMultiplier = 100;
+			let Reff = ReffChar;
+			let isLife = false;
 			if(InputGroup.value == 'pg') {
 				// Prism guardian
 				Reff += 25;
@@ -212,7 +222,7 @@ function recalcReserved() {
 				ManaMultiplier = 0;
 			}
 			Reff += getReffFromClustersForAura(AuraName);
-			var ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) / ((100 + Reff) / 100));
+			let ReservedPercentForThisAura = Math.ceil(AuraDef.resvd * (ManaMultiplier / 100) / ((100 + Reff) / 100));
 			if(isLife) {
 				ReservedPointsForThisAura = Math.ceil(TotalLife * ReservedPercentForThisAura / 100);
 				ReservedLifePoints += ReservedPointsForThisAura;
@@ -232,10 +242,10 @@ function recalcReserved() {
 		}
 	}
 
-	var FreeLife = TotalLife - ReservedLifePoints;
-	var FreeMana = TotalMana - ReservedManaPoints;
-	var ReservedLifePercent = Math.ceil((ReservedLifePoints / TotalLife) * 1000) / 10;
-	var ReservedManaPercent = Math.ceil((ReservedManaPoints / TotalMana) * 1000) / 10;
+	let FreeLife = TotalLife - ReservedLifePoints;
+	let FreeMana = TotalMana - ReservedManaPoints;
+	let ReservedLifePercent = Math.ceil((ReservedLifePoints / TotalLife) * 1000) / 10;
+	let ReservedManaPercent = Math.ceil((ReservedManaPoints / TotalMana) * 1000) / 10;
 	$('#reserve_life').innerHTML = `
 		Reserved life from percentage-based:
 		${ReservedLifePoints} (${ReservedLifePercent}%), Free: ${FreeLife}
@@ -247,15 +257,15 @@ function recalcReserved() {
 
 	ReservedManaPoints = 0;
 	ReservedLifePoints = 0;
-	for(var AuraName in g_AurasPoints) {
-		var AuraDef = g_AurasPoints[AuraName];
-		var InputGroup = document.calc[`group_point_${AuraName}`];
-		var ElementReserved = $(`#reserved_point_${AuraName}`);
+	for(let AuraName in g_AurasPoints) {
+		let AuraDef = g_AurasPoints[AuraName];
+		let InputGroup = document.calc[`group_point_${AuraName}`];
+		let ElementReserved = $(`#reserved_point_${AuraName}`);
 		if(InputGroup.value != 'off') {
 			++AurasEnabled;
-			var ManaMultiplier = 100;
-			var Reff = ReffChar;
-			var isLife = false;
+			let ManaMultiplier = 100;
+			let Reff = ReffChar;
+			let isLife = false;
 			if(InputGroup.value == 'pg') {
 				// Prism guardian
 				Reff += 25;
@@ -271,11 +281,11 @@ function recalcReserved() {
 				ManaMultiplier = 0;
 			}
 
-			var ElementLevel = document.calc[`level_${AuraName}`];
-			var BaseReserved = AuraDef.resvd[ElementLevel.value];
+			let ElementLevel = document.calc[`level_${AuraName}`];
+			let BaseReserved = AuraDef.resvd[ElementLevel.value];
 			$(`#rsvd_${AuraName}`).innerHTML = BaseReserved;
-			var ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) / ((100 + Reff) / 100));
-			var ReservedPercentForThisAura;
+			let ReservedPointsForThisAura = Math.round(BaseReserved * (ManaMultiplier / 100) / ((100 + Reff) / 100));
+			let ReservedPercentForThisAura;
 			if(isLife) {
 				ReservedLifePoints += ReservedPointsForThisAura;
 				ReservedPercentForThisAura = Math.ceil(ReservedPointsForThisAura / TotalLife * 1000) / 10;
@@ -297,8 +307,8 @@ function recalcReserved() {
 	}
 	FreeLife -= ReservedLifePoints;
 	FreeMana -= ReservedManaPoints;
-	var FreeLifePercent = Math.floor(FreeLife / TotalLife * 1000) / 10;
-	var FreeManaPercent = Math.floor(FreeMana / TotalMana * 1000) / 10;
+	let FreeLifePercent = Math.floor(FreeLife / TotalLife * 1000) / 10;
+	let FreeManaPercent = Math.floor(FreeMana / TotalMana * 1000) / 10;
 	$('#reserve_life_point').innerHTML = `Point-based reserve life: ${ReservedLifePoints}, free: ${FreeLife} (${FreeLifePercent}%)`;
 	$('#reserve_mana_point').innerHTML = `Point-based reserve mana: ${ReservedManaPoints}, free: ${FreeMana} (${FreeManaPercent}%)`;
 
@@ -312,7 +322,7 @@ function makeSensitiveToChange(Collection) {
 		if(Element.type == 'text' && Element.min != '' && Element.max != '') {
 			Element.onwheel = function(Evt) {
 				Evt.preventDefault();
-				var NewVal = parseInt(Evt.target.value) - Math.sign(Evt.deltaY);
+				let NewVal = parseInt(Evt.target.value) - Math.sign(Evt.deltaY);
 				if(NewVal > Evt.target.max) {
 					NewVal = Evt.target.max;
 				}
@@ -330,21 +340,21 @@ function makeSensitiveToChange(Collection) {
 
 function initUiPassives() {
 	// Create passives checkboxes
-	for(var PassiveCode in g_Passives) {
-		var Passive = g_Passives[PassiveCode];
-		var ReffString = '';
-		var ReffTotal = 0;
+	for(let PassiveCode in g_Passives) {
+		let Passive = g_Passives[PassiveCode];
+		let ReffString = '';
+		let ReffTotal = 0;
 		if (typeof(Passive.reff) == 'number') {
 			Passive.reff = [Passive.reff];
 		}
-		for(var ReffNode of Passive.reff) {
+		for(let ReffNode of Passive.reff) {
 			ReffTotal += ReffNode;
 			if(ReffString.length) {
 				ReffString += ' + ';
 			}
 			ReffString += ReffNode;
 		}
-		var Div = document.createElement('div');
+		let Div = document.createElement('div');
 		Div.classList.add('option');
 		Div.innerHTML = `
 			<label>
@@ -358,17 +368,17 @@ function initUiPassives() {
 
 function initUiClusters() {
 	// Create cluster checkboxes
-	for(var ClusterCode in g_Clusters) {
-		var Cluster = g_Clusters[ClusterCode];
-		var AffectsAura = g_AurasPercent[Cluster.affects];
+	for(let ClusterCode in g_Clusters) {
+		let Cluster = g_Clusters[ClusterCode];
+		let AffectsAura = g_AurasPercent[Cluster.affects];
 		if(!AffectsAura) {
 			AffectsAura = g_AurasPoints[Cluster.affects];
 		}
-		var AffectsName = AffectsAura.name;
+		let AffectsName = AffectsAura.name;
 		if(AffectsAura.abbr) {
 			AffectsName = `<abbr title="${AffectsName}">${AffectsAura.abbr}</abbr>`;
 		}
-		var Div = document.createElement('div');
+		let Div = document.createElement('div');
 		Div.classList.add('option');
 		Div.innerHTML = `
 			<label>
@@ -383,18 +393,20 @@ function initUiClusters() {
 
 function initUiAuraPoints() {
 	// Point-based auras
-	for(var AuraCode in g_AurasPoints) {
-		var Aura = g_AurasPoints[AuraCode];
-		var Row = document.createElement('tr');
+	for(let AuraCode in g_AurasPoints) {
+		let Aura = g_AurasPoints[AuraCode];
+		let Row = document.createElement('tr');
 		Row.innerHTML = `
 			<td><img src="img/${Aura.icon}.webp" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
 			<td><input name="level_${AuraCode}" value="20" min="1" max="40" class="input_small"></td>
 			<td id="rsvd_${AuraCode}"></td>
 			<td><label><input type="radio" name="group_point_${AuraCode}" value="off" checked="checked"></label></td>
-			<td><label><input type="radio" name="group_point_${AuraCode}" value="mana"></label></td>
-			<td><label><input type="radio" name="group_point_${AuraCode}" value="bm"></label></td>
-			<td><label><input type="radio" name="group_point_${AuraCode}" value="pg"></label></td>
-			<td><label><input type="radio" name="group_point_${AuraCode}" value="ml"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="helm"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="body"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="weapon"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="shield"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="gloves"></label></td>
+			<td><label><input type="radio" name="group_point_${AuraCode}" value="boots"></label></td>
 			<td id="reserved_point_${AuraCode}"></td>
 		`;
 		$('#table_aura_points').appendChild(Row);
@@ -403,22 +415,24 @@ function initUiAuraPoints() {
 
 function initUiAuraPercent(Label, AuraCodes) {
 	// Header
-	var Row = document.createElement('tr');
-	Row.innerHTML = `<td colspan="9" class="sep">${Label}</td>`;
+	let Row = document.createElement('tr');
+	Row.innerHTML = `<td colspan="11" class="sep">${Label}</td>`;
 	$('#table_aura_percent').appendChild(Row);
 
 	// Auras
-	for(var AuraCode of AuraCodes) {
-		var Aura = g_AurasPercent[AuraCode];
+	for(let AuraCode of AuraCodes) {
+		let Aura = g_AurasPercent[AuraCode];
 		Row = document.createElement('tr');
 		Row.innerHTML = `
 			<td><img src="img/${Aura.icon}.webp" class="icon">${Aura.name}</td><td>${Aura.effect}</td>
 			<td>${Aura.resvd}</td>
 			<td><label><input type="radio" name="group_${AuraCode}" value="off" checked="checked"></label></td>
-			<td><label><input type="radio" name="group_${AuraCode}" value="mana"></label></td>
-			<td><label><input type="radio" name="group_${AuraCode}" value="bm"></label></td>
-			<td><label><input type="radio" name="group_${AuraCode}" value="pg"></label></td>
-			<td><label><input type="radio" name="group_${AuraCode}" value="ml"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="helm"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="body"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="weapon"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="shield"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="gloves"></label></td>
+			<td><label><input type="radio" name="group_${AuraCode}" value="boots"></label></td>
 			<td id="reserved_${AuraCode}"></td>
 		`;
 		$('#table_aura_percent').appendChild(Row);
@@ -440,20 +454,38 @@ function toggleDisabledVisibility() {
 // Fields to export - fixed order to maintain forwards compatibility
 g_ExportFields = [
 	{input_name: 'bm_qty', type: 'checkbox'},
-	{input_name: 'item_alpha', type: 'checkbox'},
-	{input_name: 'item_amulet_fertile', type: 'checkbox'},
-	{input_name: 'item_amulet_simplex', type: 'checkbox'},
-	{input_name: 'item_skyforth', type: 'checkbox'},
-	{input_name: 'item_mask', type: 'checkbox'},
-	{input_name: 'item_conq', type: 'checkbox'},
-	{input_name: 'item_conq_impljew', type: 'checkbox'},
+	{input_name: 'eq_helmet', type: 'int'},
+	{input_name: 'reff_helmet', type: 'int'},
+	{input_name: 'bm_helmet', type: 'checkbox'},
+	{input_name: 'en_helmet', type: 'int'},
+	{input_name: 'eq_body', type: 'int'},
+	{input_name: 'reff_body', type: 'int'},
+	{input_name: 'bm_body', type: 'checkbox'},
+	{input_name: 'en_body', type: 'int'},
+	{input_name: 'eq_weapon', type: 'int'},
+	{input_name: 'reff_weapon', type: 'int'},
+	{input_name: 'bm_weapon', type: 'checkbox'},
+	{input_name: 'en_weapon', type: 'int'},
+	{input_name: 'eq_shield', type: 'int'},
+	{input_name: 'reff_shield', type: 'int'},
+	{input_name: 'bm_shield', type: 'checkbox'},
+	{input_name: 'en_shield', type: 'int'},
+	{input_name: 'eq_gloves', type: 'int'},
+	{input_name: 'reff_gloves', type: 'int'},
+	{input_name: 'bm_gloves', type: 'checkbox'},
+	{input_name: 'en_gloves', type: 'int'},
+	{input_name: 'eq_boots', type: 'int'},
+	{input_name: 'reff_boots', type: 'int'},
+	{input_name: 'bm_boots', type: 'checkbox'},
+	{input_name: 'en_boots', type: 'int'},
+	{input_name: 'eq_amulet', type: 'int'},
+	{input_name: 'reff_amulet', type: 'int'},
 	{input_name: 'passive_sov', type: 'checkbox'},
 	{input_name: 'passive_lead', type: 'checkbox'},
 	{input_name: 'passive_infl', type: 'checkbox'},
 	{input_name: 'passive_char', type: 'checkbox'},
 	{input_name: 'passive_cotc', type: 'checkbox'},
 	{input_name: 'hide_disabled', type: 'checkbox'},
-	{input_name: 'item_amulet_redeemer', type: 'int'},
 	{input_name: 'char_str', type: 'int'},
 	{input_name: 'char_dex', type: 'int'},
 	{input_name: 'char_int', type: 'int'},
@@ -476,7 +508,8 @@ g_ExportFields = [
 	{input_name: 'group_purfire', type: 'radio'},
 	{input_name: 'group_purice', type: 'radio'},
 	{input_name: 'group_purlight', type: 'radio'},
-	{input_name: 'bm_lvl', type: 'radio'},
+	{input_name: 'bm_lvl', type: 'int'},
+	{input_name: 'bm_qty', type: 'checkbox'},
 	{input_name: 'level_vit', type: 'radio'},
 	{input_name: 'level_clar', type: 'radio'},
 	{input_name: 'level_prec', type: 'radio'},
@@ -486,7 +519,7 @@ g_ExportFields = [
 	{input_name: 'cluster_self_control', type: 'radio'},
 	{input_name: 'cluster_sublime_form', type: 'radio'},
 	{input_name: 'cluster_uncompromising', type: 'radio'},
-	{input_name: 'item_jew_implreff', type: 'radio'},
+	{input_name: 'jewel_implreff', type: 'int'},
 	{input_name: 'group_heraldash', type: 'radio'},
 	{input_name: 'group_heraldice', type: 'radio'},
 	{input_name: 'group_heraldthunder', type: 'radio'},
@@ -496,9 +529,6 @@ g_ExportFields = [
 	{input_name: 'group_aspectcat', type: 'radio'},
 	{input_name: 'group_aspectcrab', type: 'radio'},
 	{input_name: 'group_aspectspider', type: 'radio'},
-	{input_name: 'item_saqawal', type: 'int'},
-	// {input_name: 'item_marchoflegion', type: 'checkbox'},
-	// {input_name: 'item_shield', type: 'int'},
 	{input_name: 'save', type: 'ignore'},
 ];
 
@@ -506,10 +536,10 @@ g_RadioOptions = ['off', 'mana', 'bm', 'pg', 'ml'];
 
 function saveToUrl() {
 	// Check if all inputs are handled in some way
-	var Inputs = $$('input');
-	for(var Input of Inputs) {
-		var isFound = false;
-		for(var ExportField of g_ExportFields) {
+	let Inputs = $$('input');
+	for(let Input of Inputs) {
+		let isFound = false;
+		for(let ExportField of g_ExportFields) {
 			if(ExportField.input_name == Input.name) {
 				isFound = true;
 			}
@@ -520,11 +550,11 @@ function saveToUrl() {
 	}
 
 	// Now gather the data in predefined order
-	var DataBitfield = [];
-	var IntVals = [];
-	var RadioVals = [];
-	for(var ExportField of g_ExportFields) {
-		var Inputs = $$(`input[name=${ExportField.input_name}]`);
+	let DataBitfield = [];
+	let IntVals = [];
+	let RadioVals = [];
+	for(let ExportField of g_ExportFields) {
+		let Inputs = $$(`input[name=${ExportField.input_name}]`);
 		if(ExportField.type == 'checkbox') {
 			if(Inputs[0].checked) {
 				DataBitfield.push(1);
@@ -534,7 +564,7 @@ function saveToUrl() {
 			}
 		}
 		else if(ExportField.type == 'int') {
-			var Val = parseInt(Inputs[0].value);
+			let Val = parseInt(Inputs[0].value);
 			if(Val == 0) {
 				DataBitfield.push(0);
 			}
@@ -545,7 +575,7 @@ function saveToUrl() {
 		}
 		else if(ExportField.type == 'radio') {
 			if(Inputs[0].type == 'radio') {
-				for(var Input of Inputs) {
+				for(let Input of Inputs) {
 					if(Input.checked) {
 						if(Input.value == 'off') {
 							DataBitfield.push(0);
@@ -581,14 +611,14 @@ function saveToUrl() {
 	IntVals = new Int16Array(IntVals);
 	RadioVals = new Uint8Array(RadioVals);
 
-	var Version = 1;
-	var Header = new Uint8Array([Version, DataBitfield.byteLength]);
-	var Merged = mergeArrays([Header, DataBitfield, IntVals, RadioVals]);
+	let Version = 1;
+	let Header = new Uint8Array([Version, DataBitfield.byteLength]);
+	let Merged = mergeArrays([Header, DataBitfield, IntVals, RadioVals]);
 	// console.log('Merged');
 	// console.log(Merged);
 
 	// Encode in url-safe base64
-	var Encoded = btoa(Merged).replace(/\+/g, '-').replace(/\//g, '_');
+	let Encoded = btoa(Merged).replace(/\+/g, '-').replace(/\//g, '_');
 	// console.log(Encoded);
 	history.pushState({}, document.title, '#/' + Encoded);
 }
@@ -596,7 +626,7 @@ function saveToUrl() {
 function loadFromUrl() {
 	return;
 	try {
-		var Encoded = window.location.hash;
+		let Encoded = window.location.hash;
 		if(Encoded == '') {
 			// Nothing here
 			return;
@@ -607,36 +637,36 @@ function loadFromUrl() {
 		Encoded = Encoded.substr(2);
 		Encoded.replace(/\-/g, '+').replace(/\_/g, '\/');
 
-		var Merged = atob(Encoded);
-		var Offs = 0;
-		var Version = Merged[Offs];
+		let Merged = atob(Encoded);
+		let Offs = 0;
+		let Version = Merged[Offs];
 		Offs += 1;
 		if(Version == 1) {
 			// Read header
-			var [DataBitfieldLength] = Merged.slice(Offs, 1);
+			let [DataBitfieldLength] = Merged.slice(Offs, 1);
 			Offs += 1;
 
 			// Read bitfield
-			var DataBitfield = Merged.slice(Offs, DataBitfieldLength);
+			let DataBitfield = Merged.slice(Offs, DataBitfieldLength);
 			Offs += DataBitfieldLength;
 			DataBitfield = bytesToBits(DataBitfield);
 
 			// Read vals.
 			// Due to tailing zeros, this may be shorter than list of controls
-			for(var BitIdx in DataBitfield) {
-				var Bit = DataBitfield[BitIdx];
-				var ExportField = g_ExportFields(BitIdx);
+			for(let BitIdx in DataBitfield) {
+				let Bit = DataBitfield[BitIdx];
+				let ExportField = g_ExportFields(BitIdx);
 				if(Bit) {
 					if(ExportField.type == 'checkbox') {
 						document.calc[ExportField.input_name].checked = (Bit == 1);
 					}
 					else if(ExportField.type == 'int') {
-						var Value = (new Uint16Array((Merged.slice(Offs, 2)).buffer))[0];
+						let Value = (new Uint16Array((Merged.slice(Offs, 2)).buffer))[0];
 						Offs += 2;
 						document.calc[ExportField.input_name].value = Value;
 					}
 					else if(ExportField.type == 'radio') {
-						var Value = Merged.slice(Offs, 1)[0];
+						let Value = Merged.slice(Offs, 1)[0];
 						Offs += 1;
 						document.calc[ExportField.input_name].value = g_RadioOptions[Value];
 					}
@@ -664,12 +694,16 @@ function calcMain() {
 	initUiAuraPercent('Aspects', ['aspectavian', 'aspectcat', 'aspectcrab', 'aspectspider']);
 
 	// Get all Reff inventory/passive inputs
-	var Inputs = $$('input[name^="passive_"]');
-	for(var i = 0; i < Inputs.length; ++i) {
+	let Inputs = $$('input[name^="passive_"]');
+	for(let i = 0; i < Inputs.length; ++i) {
 		g_ReffInputs.push(Inputs[i]);
 	}
-	var Inputs = $$('input[name^="item_"]');
-	for(var i = 0; i < Inputs.length; ++i) {
+	Inputs = $$('input[name^="item_"]');
+	for(let i = 0; i < Inputs.length; ++i) {
+		g_ReffInputs.push(Inputs[i]);
+	}
+	Inputs = $$('input[name^="eq_"]');
+	for(let i = 0; i < Inputs.length; ++i) {
 		g_ReffInputs.push(Inputs[i]);
 	}
 
